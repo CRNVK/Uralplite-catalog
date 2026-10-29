@@ -13,7 +13,7 @@ import time
 BASE = "https://uralplit.ru"
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
 CATALOG_ROOT = "/shop/kromochnye-materialy/"
-STARTS = [BASE + CATALOG_ROOT]
+STARTS = [BASE + PREFIX]
 MAX_CATEGORY_PAGES = 100
 WORKERS = 6
 TIMEOUT = 20
