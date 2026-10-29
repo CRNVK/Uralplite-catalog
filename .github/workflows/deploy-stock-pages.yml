@@ -1,0 +1,46 @@
+name: Deploy stock-enabled catalog to GitHub Pages
+on:
+  workflow_run:
+    workflows:
+      - Refresh UralPlit stock snapshot
+    types:
+      - completed
+    branches:
+      - main
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages-stock
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Assemble static site
+        run: |
+          mkdir -p site/with-stock
+          cp index.html site/index.html
+          cp with-stock/index.html site/with-stock/index.html
+          cp with-stock/stock-data.json site/with-stock/stock-data.json
+          test -s site/index.html
+          test -s site/with-stock/index.html
+          test -s site/with-stock/stock-data.json
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
