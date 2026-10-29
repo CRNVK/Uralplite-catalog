@@ -136,8 +136,8 @@ def main():
             h1 = soup.find("h1")
             title = clean(h1.get_text(" ", strip=True) if h1 else link_title)
             if source["mode"] == "lamarty":
-                title = re.sub(r"^(?:декор\\s+)?lamarty\\s+", "", title, flags=re.I)
-                title = re.sub(r"^decor\\s+lamarty\\s+", "", title, flags=re.I)
+                title = re.sub(r"^(?:декор\s+)?lamarty\s+", "", title, flags=re.I)
+                title = re.sub(r"^decor\s+lamarty\s+", "", title, flags=re.I)
             description = clean((soup.find("meta", attrs={"name": "description"}) or {}).get("content", ""))
             collection = ""
             text = clean(soup.get_text(" ", strip=True))
