@@ -192,6 +192,8 @@ def main():
     invalid = [p for p in products.values() if not p.get("title") or not p.get("url") or not p.get("width_mm") or p.get("thickness_mm") not in (0.4, 1.0, 1.5, 2.0)]
     if invalid:
         raise SystemExit(f"{len(invalid)} products have invalid title/URL/dimensions; refusing to publish questionable stock.")
+    if errors:
+        print("Category page errors: " + json.dumps(errors, ensure_ascii=False), flush=True)
     if errors and len(errors) > max(3, int(len(seen) * 0.1)):
         raise SystemExit(f"Too many category page errors ({len(errors)}/{len(seen)}); refusing to publish partial stock.")
     output = {
