@@ -40,6 +40,75 @@ class PageParser(HTMLParser):
             if self.current_anchor is not None:
                 self.current_anchor["text"].append(s)
 
+class ProductCardParser(HTMLParser):
+    """Extract article, title, URL and quantity from each actual product-card container."""
+    def __init__(self):
+        super().__init__()
+        self.card = None
+        self.cards = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = set((attrs.get("class") or "").split())
+        if tag == "div":
+            if self.card is None and "shop-row-block" in classes:
+                self.card = {"depth": 1, "text": [], "title_parts": [], "url": "", "in_title": False}
+            elif self.card is not None:
+                self.card["depth"] += 1
+        if self.card is not None and tag == "a" and "shop-item-title" in classes:
+            self.card["url"] = attrs.get("href") or self.card["url"]
+            self.card["in_title"] = True
+
+    def handle_endtag(self, tag):
+        if self.card is None:
+            return
+        if tag == "a":
+            self.card["in_title"] = False
+        if tag == "div":
+            self.card["depth"] -= 1
+            if self.card["depth"] <= 0:
+                self.cards.append(self.card)
+                self.card = None
+
+    def handle_data(self, data):
+        if self.card is None:
+            return
+        value = " ".join(data.split())
+        if value:
+            self.card["text"].append(value)
+            if self.card["in_title"]:
+                self.card["title_parts"].append(value)
+
+    def products(self, page_url):
+        found = {}
+        for card in self.cards:
+            body = " ".join(card["text"])
+            article_match = re.search(r"Артикул\\s*:?\\s*(\\d{5,})", body, re.I)
+            qty_match = re.search(r"Кол-во\\s*:?\\s*([\\d\\s\\u00a0.,]+?)\\s*м\\b", body, re.I)
+            title = " ".join(" ".join(card["title_parts"]).split())
+            if not article_match or not qty_match or not title:
+                continue
+            article = article_match.group(1)
+            stock_digits = re.sub(r"\\D", "", qty_match.group(1))
+            if not stock_digits:
+                continue
+            dim = re.search(r"(\\d{2})\\s*[/x×]\\s*(0[,.]4|1[,.]5|1|2)\\s*мм", title, re.I)
+            width = int(dim.group(1)) if dim else None
+            thickness = float(dim.group(2).replace(",", ".")) if dim else None
+            item = {
+                "url": urljoin(page_url, card["url"]) if card["url"] else page_url,
+                "article": article,
+                "title": title,
+                "width_mm": width,
+                "thickness_mm": thickness,
+                "stock_m": int(stock_digits),
+                "unit": "м",
+            }
+            # If desktop/mobile cards repeat, retain the first complete card per article.
+            found.setdefault(article, item)
+        return list(found.values())
+
+
 def canonical(url):
     p = urlparse(url)
     if p.scheme not in ("http", "https") or p.netloc.lower() not in ("uralplit.ru", "www.uralplit.ru"):
@@ -66,59 +135,11 @@ def parse_page(url):
     parser.feed(html)
     text = " ".join(parser.text_parts)
 
-    # On category listings, every item has an article and a quantity on the same page.
-    article_matches = list(re.finditer(r"Артикул\s*:?\s*(\d{5,})", text, re.I))
-    product_anchor_by_title = {}
-    product_urls = set()
-    category_leaves = {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"}
-    for a in parser.anchors:
-        href = canonical(urljoin(url, a["href"] or ""))
-        if not href or is_generic_anchor(a["text"]):
-            continue
-        parsed_href = urlparse(href)
-        leaf = parsed_href.path.rstrip("/").rsplit("/", 1)[-1]
-        if leaf in category_leaves or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in parsed_href.query:
-            continue
-        if parsed_href.query:
-            continue
-        product_anchor_by_title.setdefault(" ".join(a["text"].split()), href)
-        product_urls.add(href)
-
-    products = {}
-    for i, match in enumerate(article_matches):
-        article = match.group(1)
-        next_start = article_matches[i + 1].start() if i + 1 < len(article_matches) else len(text)
-        segment = text[match.end():next_start]
-        qty = re.search(r"Кол-во\s*:?\s*([\d\s\u00a0.,]+?)\s*м\b", segment, re.I)
-        if not qty:
-            continue
-        stock_digits = re.sub(r"\D", "", qty.group(1))
-        if not stock_digits:
-            continue
-
-        # The product title sits immediately after its image link and before its article.
-        # Use local page text, not global anchor order (desktop/mobile markup may differ).
-        before = text[max(0, match.start() - 500):match.start()]
-        title = before.rsplit("Image", 1)[-1]
-        title = re.sub(r"\b(?:Input|Артикул|Кол-во|В корзину|Перейти в корзину|Товар успешно добавлен в корзину)\b.*$", "", title, flags=re.I).strip()
-        title = " ".join(title.replace("&nbsp;", " ").replace("&amp;", "&").split())
-        title = title[-180:].strip()
-        product_url = product_anchor_by_title.get(title, "")
-        if not title or not re.search(r"\d{2}\s*/\s*(?:0[,.]4|1[,.]5|1|2)\s*мм", title, re.I):
-            # Fail closed instead of attaching a different decor's title to an article.
-            continue
-        dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|1[,.]5|1|2)\s*мм", title, re.I)
-        width = int(dim.group(1)) if dim else None
-        thickness = float(dim.group(2).replace(",", ".")) if dim else None
-        products[article] = {
-            "url": product_url or url,
-            "article": article,
-            "title": title,
-            "width_mm": width,
-            "thickness_mm": thickness,
-            "stock_m": int(stock_digits),
-            "unit": "м",
-        }
+    # Parse each product card as a unit so its title, URL, article and stock cannot drift apart.
+    card_parser = ProductCardParser()
+    card_parser.feed(html)
+    parsed_products = card_parser.products(url)
+    product_urls = {item["url"] for item in parsed_products}
 
     # Don't crawl product pages again: stock is already present in the category listing.
     category_links = []
@@ -132,7 +153,7 @@ def parse_page(url):
         query = urlparse(resolved).query
         if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
             category_links.append(resolved)
-    return list(products.values()), list(dict.fromkeys(category_links)), len(article_matches)
+    return parsed_products, list(dict.fromkeys(category_links)), len(parsed_products)
 
 def main():
     queue = list(STARTS)
