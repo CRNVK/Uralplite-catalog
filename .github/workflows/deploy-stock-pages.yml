@@ -8,8 +8,7 @@ on:
       - "stock/index.html"
       - "with-stock/index.html"
       - "decor-mappings.json"
-      - "visual-catalog.json"
-      - "vision/**"
+      - "vision/index.html"
       - ".github/workflows/deploy-stock-pages.yml"
   workflow_run:
     workflows:
