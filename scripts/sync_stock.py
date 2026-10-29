@@ -11,7 +11,8 @@ from urllib.parse import urljoin, urlparse, urlunparse
 from urllib.request import Request, urlopen
 
 BASE = "https://uralplit.ru"
-START = BASE + "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
+STARTS = [BASE + "/shop/kromochnye-materialy/kromka-pvkh-uralplit/", BASE + "/shop/kromochnye-materialy/kromka-pvkh-uralplit/04-mm/"]
+START = STARTS[0]
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
 MAX_PAGES = 1200
 WORKERS = 8
@@ -85,7 +86,7 @@ def parse_page(url):
     return None, links
 
 def main():
-    queue = [START]
+    queue = list(STARTS)
     seen = set()
     products = {}
     errors = []
@@ -117,7 +118,7 @@ def main():
     if len(products) < 10:
         raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} pages; refusing to publish incomplete stock.")
     output = {
-        "source": START,
+        "source": STARTS,
         "region": "Екатеринбург",
         "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
         "pages_checked": len(seen),
