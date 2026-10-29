@@ -77,9 +77,12 @@ def parse_page(url):
             continue
         parsed_href = urlparse(href)
         leaf = parsed_href.path.rstrip("/").rsplit("/", 1)[-1]
-        if leaf in category_leaves or "PAGEN_" in parsed_href.query:
+        if leaf in category_leaves or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in parsed_href.query:
             continue
         # Product-name anchors are paired with article/quantity blocks in document order.
+        # Skip query-string filter/sort links: they are navigation, not product names.
+        if parsed_href.query:
+            continue
         title_by_article_index.append((a["text"], href))
         product_urls.add(href)
 
@@ -125,7 +128,8 @@ def parse_page(url):
         # Keep category/filter/pagination links, not arbitrary links with a product-like slug.
         path = urlparse(resolved).path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
-        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or urlparse(resolved).query:
+        query = urlparse(resolved).query
+        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
             category_links.append(resolved)
     return list(products.values()), list(dict.fromkeys(category_links)), len(article_matches)
 
@@ -154,6 +158,7 @@ def main():
                     for link in links:
                         if link not in seen and link not in queue:
                             queue.append(link)
+                    print(f"Checked {len(seen)}/{MAX_CATEGORY_PAGES} pages; products={len(products)}; queued={len(queue)}", flush=True)
                 except Exception as exc:
                     errors.append({"url": url, "error": str(exc)[:240]})
     if len(seen) >= MAX_CATEGORY_PAGES and queue:
