@@ -21,3 +21,6 @@ print(json.dumps({
 },ensure_ascii=False,indent=2))
 if len(items)<20:
  raise SystemExit(f"Expected at least 20 parsed products from first category page, got {len(items)}")
+expected=next((p for p in items if p["article"]=="024017"),None)
+if not expected or "Белый WS 296" not in expected["title"]:
+ raise SystemExit(f"Article/title association failed for known article 024017: {expected}")
