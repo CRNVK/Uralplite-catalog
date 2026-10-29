@@ -1,0 +1,21 @@
+name: Cancel superseded catalog crawl
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/cancel-superseded-crawl.yml"
+permissions:
+  actions: write
+  contents: read
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel superseded crawl
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for run_id in 40876778843 40876482392 40876038755; do
+            gh run cancel "$run_id" --repo CRNVK/Uralplite-catalog || true
+          done
