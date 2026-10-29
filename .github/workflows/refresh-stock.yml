@@ -40,12 +40,12 @@ jobs:
           assert data.get("errors_count") == 0
           assert len(data.get("products", [])) == data["products_count"]
           print(f"Validated {data['products_count']} products; pages={data['pages_checked']}; retrieved_at={data['retrieved_at_utc']}")
+          PY
           if git ls-files --error-unmatch stock-data.json >/dev/null 2>&1; then
             git checkout -- stock-data.json
           else
             rm -f stock-data.json
           fi
-          PY
       - name: Commit refreshed snapshot
         env:
           GH_TOKEN: ${{ github.token }}
