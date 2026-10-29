@@ -47,7 +47,9 @@ def image_candidates(soup, title, page_url):
     candidates = []
     og = soup.find("meta", property="og:image")
     if og and og.get("content"):
-        candidates.append((urljoin(page_url, og["content"]), "og:image", 0))
+        # Lamarty decor detail pages use OpenGraph imagery for the decor itself.
+        og_score = 6 if "lamarty.ru/lamarty/decors/" in page_url else 0
+        candidates.append((urljoin(page_url, og["content"]), "og:image", og_score))
     title_norm = clean(title).casefold()
     for img in soup.find_all("img"):
         src = img.get("data-src") or img.get("data-original") or img.get("src") or img.get("data-lazy-src")
@@ -133,6 +135,9 @@ def main():
             soup = BeautifulSoup(detail_html, "html.parser")
             h1 = soup.find("h1")
             title = clean(h1.get_text(" ", strip=True) if h1 else link_title)
+            if source["mode"] == "lamarty":
+                title = re.sub(r"^(?:декор\\s+)?lamarty\\s+", "", title, flags=re.I)
+                title = re.sub(r"^decor\\s+lamarty\\s+", "", title, flags=re.I)
             description = clean((soup.find("meta", attrs={"name": "description"}) or {}).get("content", ""))
             collection = ""
             text = clean(soup.get_text(" ", strip=True))
