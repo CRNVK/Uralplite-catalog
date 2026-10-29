@@ -199,6 +199,22 @@ def main():
                 }
             if i % 25 == 0:
                 print(f"  processed {i}/{len(links)}")
+    # Keep the last known-good records for any source that failed or returned an implausibly small catalog.
+    failed_manufacturers = {item.split(":", 1)[0] for item in errors}
+    if OUT.exists() and failed_manufacturers:
+        try:
+            previous = json.loads(OUT.read_text(encoding="utf-8"))
+            for manufacturer in failed_manufacturers:
+                for key in list(output):
+                    if output[key].get("manufacturer") == manufacturer:
+                        del output[key]
+                for record in previous:
+                    if record.get("manufacturer") == manufacturer:
+                        key = manufacturer.casefold() + "|" + clean(record.get("decor", "")).casefold()
+                        output[key] = record
+            print("  preserved last known-good records for: " + ", ".join(sorted(failed_manufacturers)))
+        except Exception as exc:
+            print(f"WARN could not preserve previous catalog records: {exc}")
     records = sorted(output.values(), key=lambda x: (x["manufacturer"].casefold(), x["decor"].casefold()))
     OUT.write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"WROTE {len(records)} catalog records; {sum(bool(x['image']) for x in records)} with images; {len(errors)} source errors")
