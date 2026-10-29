@@ -12,7 +12,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: uralplit-stock-refresh
+  group: uralplit-stock-refresh-v2
   cancel-in-progress: false
 jobs:
   refresh:
