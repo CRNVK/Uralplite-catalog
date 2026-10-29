@@ -68,7 +68,7 @@ def parse_page(url):
 
     # On category listings, every item has an article and a quantity on the same page.
     article_matches = list(re.finditer(r"Артикул\s*:?\s*(\d{5,})", text, re.I))
-    title_by_article_index = []
+    product_anchor_by_title = {}
     product_urls = set()
     category_leaves = {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"}
     for a in parser.anchors:
@@ -79,11 +79,9 @@ def parse_page(url):
         leaf = parsed_href.path.rstrip("/").rsplit("/", 1)[-1]
         if leaf in category_leaves or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in parsed_href.query:
             continue
-        # Product-name anchors are paired with article/quantity blocks in document order.
-        # Skip query-string filter/sort links: they are navigation, not product names.
         if parsed_href.query:
             continue
-        title_by_article_index.append((a["text"], href))
+        product_anchor_by_title.setdefault(" ".join(a["text"].split()), href)
         product_urls.add(href)
 
     products = {}
@@ -97,15 +95,18 @@ def parse_page(url):
         stock_digits = re.sub(r"\D", "", qty.group(1))
         if not stock_digits:
             continue
-        title = ""
-        product_url = ""
-        if i < len(title_by_article_index):
-            title, product_url = title_by_article_index[i]
-        if not title:
-            before = text[max(0, match.start() - 180):match.start()]
-            title = re.split(r"(?:Перейти в корзину|В корзину)", before, flags=re.I)[-1]
-            title = re.sub(r"\[?Image\]?", " ", title, flags=re.I).strip()[-130:]
+
+        # The product title sits immediately after its image link and before its article.
+        # Use local page text, not global anchor order (desktop/mobile markup may differ).
+        before = text[max(0, match.start() - 500):match.start()]
+        title = before.rsplit("Image", 1)[-1]
+        title = re.sub(r"\b(?:Input|Артикул|Кол-во|В корзину|Перейти в корзину|Товар успешно добавлен в корзину)\b.*$", "", title, flags=re.I).strip()
         title = " ".join(title.replace("&nbsp;", " ").replace("&amp;", "&").split())
+        title = title[-180:].strip()
+        product_url = product_anchor_by_title.get(title, "")
+        if not title or not re.search(r"\d{2}\s*/\s*(?:0[,.]4|1[,.]5|1|2)\s*мм", title, re.I):
+            # Fail closed instead of attaching a different decor's title to an article.
+            continue
         dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|1[,.]5|1|2)\s*мм", title, re.I)
         width = int(dim.group(1)) if dim else None
         thickness = float(dim.group(2).replace(",", ".")) if dim else None
