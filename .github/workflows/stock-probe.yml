@@ -1,4 +1,4 @@
-name: Probe UralPlit stock page
+name: Validate UralPlit public stock crawler
 on:
   workflow_dispatch:
   push:
