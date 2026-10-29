@@ -94,7 +94,7 @@ function filtered(){
 function cell(value,cls=''){const td=document.createElement('td');td.className=cls;td.textContent=value||'';return td}
 function loadStock(){
  if(!stockPromise){
-  stockPromise=fetch('stock-data.json?ts='+Date.now(),{cache:'no-store'})
+  stockPromise=fetch('../stock-data.json?ts='+Date.now(),{cache:'no-store'})
    .then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json()})
    .then(payload=>{
     if(!payload||!Array.isArray(payload.products)||!payload.retrieved_at_utc)throw new Error('Некорректный файл остатков');
