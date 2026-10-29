@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#38221c">
+<title>УралПлит — распознавание декора по фото</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap');
+:root{--brown:#38221c;--cream:#f6f2ec;--red:#941a18;--muted:#756d68;--line:#e4d9d0;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--brown);font:16px 'PT Sans',Arial,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line)}.top{max-width:1120px;margin:auto;padding:20px 22px;display:flex;align-items:center;gap:18px}
+.brand{font:700 18px Onest,Arial,sans-serif;letter-spacing:.02em;background:var(--brown);color:#fff;border-radius:8px;padding:11px 13px;white-space:nowrap}
+h1{font:600 clamp(24px,4vw,38px)/1.12 Onest,Arial,sans-serif;margin:0 0 8px}.subtitle{color:var(--muted);margin:0;line-height:1.45}
+main{max-width:1120px;margin:auto;padding:26px 22px 36px}.hero{margin-bottom:22px}.pill{display:inline-flex;border:1px solid #d9c8bc;background:#fff;border-radius:99px;padding:6px 10px;font-size:12px;color:#705c50;margin-bottom:12px}
+.layout{display:grid;grid-template-columns:minmax(0, .95fr) minmax(0,1.05fr);gap:18px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 24px #38221c08}
+.panel h2{font:600 19px Onest,Arial,sans-serif;margin:0 0 8px}.muted{color:var(--muted);font-size:14px;line-height:1.45}
+.drop{margin-top:16px;border:1.5px dashed #cdbcb0;border-radius:12px;background:#fcfaf7;min-height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.drop img{display:block;width:100%;max-height:360px;object-fit:contain}.empty-preview{text-align:center;padding:28px 18px;color:var(--muted)}.camera-icon{font-size:36px;margin-bottom:8px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button,.file-label{font:600 14px Onest,Arial,sans-serif;border:1px solid #d8c9bf;background:#fff;color:var(--brown);border-radius:9px;padding:11px 14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.primary{background:var(--red);color:#fff;border-color:var(--red)}button:disabled{opacity:.45;cursor:not-allowed}input[type=file]{display:none}
+.range{margin-top:16px;padding:12px 14px;border-radius:10px;background:#f8f4ef}.range label{display:flex;justify-content:space-between;gap:12px;font-size:13px;margin-bottom:8px}.range input{width:100%;accent-color:var(--red)}
+.status{margin-top:13px;font-size:13px;color:var(--muted);min-height:20px}.progress{height:4px;background:#eee4dd;border-radius:4px;overflow:hidden;margin-top:8px}.progress span{display:block;height:100%;width:0;background:var(--red);transition:width .2s}
+.result-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}.count{font-size:12px;color:var(--muted);white-space:nowrap}
+.results{display:grid;gap:10px}.candidate{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:13px;align-items:start}.candidate img{width:96px;height:88px;object-fit:cover;background:#f4eee8;border-radius:8px}.candidate h3{font:600 15px Onest,Arial,sans-serif;margin:2px 0 4px}.meta{font-size:12px;color:var(--muted);line-height:1.4}.score{font-size:12px;color:#6b493a;margin-top:7px}.edgebox{margin-top:9px;padding-top:8px;border-top:1px solid #eee5de;font-size:13px;line-height:1.45}.edgebox strong{display:block;margin-bottom:2px}.source{font-size:12px;color:var(--red);text-decoration:underline;display:inline-block;margin-top:6px}
+.empty-state{border:1px dashed var(--line);border-radius:12px;padding:24px 16px;text-align:center;color:var(--muted);line-height:1.5}
+.notice{margin-top:18px;padding:13px 15px;border-left:3px solid var(--red);background:#fff;border-radius:0 9px 9px 0;color:#5c4d45;font-size:13px;line-height:1.5}
+footer{max-width:1120px;margin:auto;padding:0 22px 28px;color:var(--muted);font-size:12px;line-height:1.5}
+@media(max-width:760px){.top{align-items:flex-start;padding:16px;gap:12px}.brand{font-size:14px;padding:9px}.top h1{font-size:22px}main{padding:20px 12px 28px}.layout{grid-template-columns:1fr}.panel{padding:16px}.drop{min-height:190px}.candidate{grid-template-columns:82px minmax(0,1fr);gap:10px;padding:10px}.candidate img{width:82px;height:82px}.actions button,.file-label{flex:1}.result-head{align-items:center}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand">УРАЛПЛИТ</div><div><h1>Найди декор по фотографии</h1><p class="subtitle">Сфотографируй поверхность ЛДСП — подберём похожие декоры и кромку</p></div></div></header>
+<main>
+<section class="hero"><span class="pill">ПРОТОТИП · ВИЗУАЛЬНЫЙ ПОИСК</span><p class="subtitle">Наведи камеру на саму поверхность плиты. Надписи, этикетки и штрихкоды не нужны.</p></section>
+<div class="layout">
+<section class="panel">
+<h2>1. Сфотографируй плиту</h2>
+<p class="muted">Лучше при ровном дневном свете, без бликов. Заполни кадр одним декором и по возможности держи камеру параллельно поверхности.</p>
+<div class="drop" id="previewBox"><div class="empty-preview"><div class="camera-icon">▧</div><strong>Здесь появится фото плиты</strong><div class="muted">Можно сделать снимок или выбрать готовое фото</div></div></div>
+<div class="actions">
+<label class="file-label primary" for="cameraInput">▣ Открыть камеру</label><input id="cameraInput" type="file" accept="image/*" capture="environment">
+<label class="file-label" for="fileInput">Выбрать фото</label><input id="fileInput" type="file" accept="image/*">
+</div>
+<div class="range"><label for="cropRange"><span>Область анализа</span><span id="cropLabel">Центр · 70%</span></label><input id="cropRange" type="range" min="45" max="100" value="70"></div>
+<div class="actions"><button id="matchBtn" class="primary" disabled>Найти похожие декоры</button><button id="clearBtn" disabled>Сбросить</button></div>
+<div class="status" id="status">Загружаем индекс официальных каталогов…</div><div class="progress"><span id="progressBar"></span></div>
+</section>
+<section class="panel">
+<div class="result-head"><div><h2>2. Похожие декоры</h2><p class="muted">Сначала показываем визуально близкие варианты. Точное совпадение нужно подтвердить.</p></div><span class="count" id="count">0 вариантов</span></div>
+<div id="results" class="results"><div class="empty-state">Сделай фото, и здесь появятся наиболее похожие варианты из подключённых каталогов.</div></div>
+</section>
+</div>
+<div class="notice"><strong>Важно:</strong> этот прототип сравнивает визуальные признаки фото с доступными эталонными изображениями. Свет, баланс белого, фактура и похожие декоры могут влиять на результат. Кромку рекомендуем проверять по физическому образцу. Изображения и названия относятся к соответствующим производителям.</div>
+</main>
+<footer>Источники каталогов: официальные сайты производителей. Сервис не является официальным инструментом распознавания производителей плит. <a href="../" style="color:var(--red)">Открыть таблицу соответствий УралПлит</a> · <a href="../stock/" style="color:var(--red)">Таблица с остатками</a></footer>
+<script>
+let selectedFile=null, selectedImage=null, catalogue=[], mappings=[], stock=null, indexReady=false;
+const $=id=>document.getElementById(id);
+const cameraInput=$('cameraInput'), fileInput=$('fileInput'), previewBox=$('previewBox'), matchBtn=$('matchBtn'), statusEl=$('status'), resultsEl=$('results');
+function setStatus(s,pct){statusEl.textContent=s;if(pct!==undefined)$('progressBar').style.width=pct+'%'}
+function clear(){selectedFile=null;selectedImage=null;cameraInput.value='';fileInput.value='';previewBox.innerHTML='<div class="empty-preview"><div class="camera-icon">▧</div><strong>Здесь появится фото плиты</strong><div class="muted">Можно сделать снимок или выбрать готовое фото</div></div>';matchBtn.disabled=true;$('clearBtn').disabled=true;resultsEl.innerHTML='<div class="empty-state">Сделай фото, и здесь появятся наиболее похожие варианты из подключённых каталогов.</div>';$('count').textContent='0 вариантов';setStatus(indexReady?'Каталоги загружены. Можно искать.':'Индекс каталогов пока не загружен.',indexReady?100:0)}
+function loadImage(file){if(!file||!file.type.startsWith('image/'))return;selectedFile=file;const url=URL.createObjectURL(file);const img=new Image();img.onload=()=>{selectedImage=img;previewBox.replaceChildren(img);matchBtn.disabled=!indexReady;$('clearBtn').disabled=false;setStatus(indexReady?'Фото готово. Нажми «Найти похожие декоры».':'Фото готово, ждём индекс каталогов.',indexReady?100:20)};img.onerror=()=>setStatus('Не удалось открыть изображение. Попробуй другой файл.');img.src=url}
+cameraInput.addEventListener('change',e=>loadImage(e.target.files[0]));fileInput.addEventListener('change',e=>loadImage(e.target.files[0]));$('clearBtn').addEventListener('click',clear);
+$('cropRange').addEventListener('input',e=>$('cropLabel').textContent=(e.target.value==='100'?'Весь кадр':'Центр · '+e.target.value+'%'));
+function norm(s){return String(s||'').toLocaleLowerCase('ru').normalize('NFKC').replace(/ё/g,'е').replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+function descriptor(img,cropPercent=70){const c=document.createElement('canvas'),ctx=c.getContext('2d',{willReadFrequently:true});const size=48;c.width=size;c.height=size;const scale=cropPercent/100;const sw=img.naturalWidth||img.width,sh=img.naturalHeight||img.height;const cw=sw*scale,ch=sh*scale,sx=(sw-cw)/2,sy=(sh-ch)/2;ctx.drawImage(img,sx,sy,cw,ch,0,0,size,size);const d=ctx.getImageData(0,0,size,size).data;const hist=new Float32Array(48);let edge=0,edgeCount=0;const gray=new Float32Array(size*size);for(let y=0;y<size;y++){for(let x=0;x<size;x++){const i=(y*size+x)*4,r=d[i]/255,g=d[i+1]/255,b=d[i+2]/255;const max=Math.max(r,g,b),min=Math.min(r,g,b),delta=max-min;let h=0;if(delta){if(max===r)h=((g-b)/delta)%6;else if(max===g)h=(b-r)/delta+2;else h=(r-g)/delta+4;h/=6;if(h<0)h++;}const s=max?delta/max:0;const hb=Math.min(11,Math.floor(h*12)),sb=Math.min(3,Math.floor(s*4));hist[hb*4+sb]++;gray[y*size+x]=.299*d[i]+.587*d[i+1]+.114*d[i+2];}}let total=size*size;for(let i=0;i<hist.length;i++)hist[i]/=total;for(let y=1;y<size-1;y++)for(let x=1;x<size-1;x++){const i=y*size+x,gx=gray[i+1]-gray[i-1],gy=gray[i+size]-gray[i-size];edge+=Math.min(1,Math.hypot(gx,gy)/160);edgeCount++}return {hist,texture:edge/edgeCount}}
+function distance(a,b){let d=0;for(let i=0;i<a.hist.length;i++){const x=a.hist[i],y=b.hist[i];d+=Math.abs(x-y)/(x+y+0.0001)}const td=Math.abs(a.texture-b.texture);return d/a.hist.length*.78+td*.22}
+function mapEdges(item){const q=norm(item.decor),manufacturer=norm(item.manufacturer);const found=mappings.filter(m=>{const md=norm(m.decor),mm=norm(m.manufacturer);return md&&((md===q)||(q.includes(md)&&md.length>5)||(md.includes(q)&&q.length>5))&&(mm===manufacturer||manufacturer.includes(mm)||mm.includes(manufacturer))});return found.slice(0,3)}
+function matchingStock(edge){if(!stock||!Array.isArray(stock.products)||!edge)return [];const tokens=norm(edge).split(' ').filter(t=>t&&!['мм','м','без','клея','кромка','уралплит','l','u','n'].includes(t));return stock.products.filter(p=>{const title=norm(p.title);return tokens.length&&tokens.every(t=>title.split(' ').includes(t))}).slice(0,3)}
+async function loadCatalogue(){try{const [cat,map,stk]=await Promise.all([fetch('../visual-catalog.json?ts='+Date.now(),{cache:'no-store'}),fetch('../decor-mappings.json?ts='+Date.now(),{cache:'no-store'}),fetch('../with-stock/stock-data.json?ts='+Date.now(),{cache:'no-store'}).catch(()=>null)]);if(!cat.ok)throw new Error('visual-catalog.json HTTP '+cat.status);catalogue=await cat.json();mappings=map.ok?await map.json():[];if(stk&&stk.ok)stock=await stk.json();indexReady=catalogue.some(x=>x.image);matchBtn.disabled=!selectedImage||!indexReady;setStatus(indexReady?'Каталоги загружены: '+catalogue.length+' декоров. Можно искать.':'Список декоров найден, но эталонные изображения пока не подготовлены. Обновление базы запущено.',indexReady?100:15)}catch(e){setStatus('Каталог изображений пока не опубликован. Индекс появится после первого обновления базы.',0);console.warn(e)}}
+async function getDescriptor(item){if(item._descriptor)return item._descriptor;if(!item.image)return null;return new Promise(resolve=>{const img=new Image();img.onload=()=>{try{item._descriptor=descriptor(img,100);resolve(item._descriptor)}catch(e){resolve(null)}};img.onerror=()=>resolve(null);img.src=item.image.startsWith('http')?item.image:'../'+item.image})}
+async function runMatch(){if(!selectedImage||!indexReady)return;matchBtn.disabled=true;resultsEl.innerHTML='<div class="empty-state">Сравниваем фото с эталонными текстурами…</div>';setStatus('Анализируем изображение…',25);try{const query=descriptor(selectedImage,Number($('cropRange').value));const scored=[];for(let i=0;i<catalogue.length;i++){const item=catalogue[i];if(!item.image)continue;const feat=await getDescriptor(item);if(feat)scored.push({...item,score:distance(query,feat)});if(i%8===0){setStatus('Сравнение образцов: '+Math.min(i+1,catalogue.length)+' из '+catalogue.length+'…',25+Math.round((i+1)/catalogue.length*60))}}scored.sort((a,b)=>a.score-b.score);renderResults(scored.slice(0,8));setStatus('Готово. Выбери наиболее похожий вариант и проверь кромку.',100)}catch(e){setStatus('Не удалось сравнить изображения. Попробуй другое фото.',0);console.error(e)}finally{matchBtn.disabled=false}}
+function renderResults(items){resultsEl.replaceChildren();$('count').textContent=items.length+' вариантов';if(!items.length){resultsEl.innerHTML='<div class="empty-state">В базе пока нет подходящих эталонных изображений. Каталог будет расширяться по мере подключения источников.</div>';return}items.forEach(item=>{const card=document.createElement('article');card.className='candidate';const img=document.createElement('img');img.src=item.image.startsWith('http')?item.image:'../'+item.image;img.alt='Образец '+item.decor;const body=document.createElement('div');const h=document.createElement('h3');h.textContent=item.decor;const meta=document.createElement('div');meta.className='meta';meta.textContent=[item.manufacturer,item.collection].filter(Boolean).join(' · ');const score=document.createElement('div');score.className='score';score.textContent='Визуальная близость: '+Math.max(1,Math.round((1-item.score)*100))+'% · ориентировочная оценка';body.append(h,meta,score);const edges=mapEdges(item);const edgebox=document.createElement('div');edgebox.className='edgebox';if(edges.length){const strong=document.createElement('strong');strong.textContent='Возможная кромка УралПлит';edgebox.append(strong);edges.forEach(m=>{const line=document.createElement('div');line.textContent=m.edge||'Требует подбора';edgebox.append(line)});const stk=matchingStock(edges[0].edge);if(stk.length){const s=document.createElement('div');s.style.marginTop='5px';s.textContent='Совпадения по складскому каталогу: '+stk.map(p=>p.title).join('; ');edgebox.append(s)}}else edgebox.textContent='Точное соответствие кромки в справочнике пока не найдено — требуется проверка';body.append(edgebox);if(item.source_url){const a=document.createElement('a');a.className='source';a.href=item.source_url;a.target='_blank';a.rel='noopener';a.textContent='Открыть официальный декор ↗';body.append(a)}card.append(img,body);resultsEl.append(card)})}
+matchBtn.addEventListener('click',runMatch);loadCatalogue();
+</script>
+</body></html>
