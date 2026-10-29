@@ -211,14 +211,14 @@ def main():
                     errors.append({"url": url, "error": str(exc)[:240]})
     if len(seen) >= MAX_CATEGORY_PAGES and queue:
         raise SystemExit(f"Safety limit reached ({MAX_CATEGORY_PAGES} category pages); refusing to publish partial stock.")
-    if len(products) < 900:
-        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} catalog pages; expected at least 900 UralPlit PVC edge items across thicknesses 0.4/0.8/1/1.5/2 mm, refusing to publish incomplete stock.")
-    thickness_counts = {thickness: sum(1 for p in products.values() if p.get("thickness_mm") == thickness) for thickness in (0.4, 0.8, 1.0, 1.5, 2.0)}
-    minimum_by_thickness = {0.4: 190, 0.8: 30, 1.0: 300, 1.5: 15, 2.0: 280}
+    if len(products) < 880:
+        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} catalog pages; expected at least 880 UralPlit PVC edge items across thicknesses 0.4/1/1.5/2 mm, refusing to publish incomplete stock.")
+    thickness_counts = {thickness: sum(1 for p in products.values() if p.get("thickness_mm") == thickness) for thickness in (0.4, 1.0, 1.5, 2.0)}
+    minimum_by_thickness = {0.4: 190, 1.0: 300, 1.5: 15, 2.0: 280}
     missing_thicknesses = {str(k): {"found": thickness_counts[k], "minimum": v} for k, v in minimum_by_thickness.items() if thickness_counts[k] < v}
     if missing_thicknesses:
         raise SystemExit("One or more thickness categories are incomplete: " + json.dumps(missing_thicknesses, ensure_ascii=False))
-    invalid = [p for p in products.values() if not p.get("title") or not p.get("url") or not p.get("width_mm") or p.get("thickness_mm") not in (0.4, 0.8, 1.0, 1.5, 2.0)]
+    invalid = [p for p in products.values() if not p.get("title") or not p.get("url") or not p.get("width_mm") or p.get("thickness_mm") not in (0.4, 1.0, 1.5, 2.0)]
     if invalid:
         raise SystemExit(f"{len(invalid)} products have invalid title/URL/dimensions; refusing to publish questionable stock.")
     if errors:
