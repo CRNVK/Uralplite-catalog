@@ -1,51 +1,56 @@
 #!/usr/bin/env python3
-"""Collect public UralPlit PVC edge product stock pages for a controlled prototype, tested by CI in the isolated prototype branch."""
+"""Collect current stock from public UralPlit PVC edge category pages."""
 import json
 import re
-import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from html.parser import HTMLParser
-from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlparse, urlunparse
 from urllib.request import Request, urlopen
 
 BASE = "https://uralplit.ru"
-STARTS = [BASE + "/shop/kromochnye-materialy/kromka-pvkh-uralplit/", BASE + "/shop/kromochnye-materialy/kromka-pvkh-uralplit/04-mm/"]
-START = STARTS[0]
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
-MAX_PAGES = 1200
-WORKERS = 8
-TIMEOUT = 25
+STARTS = [BASE + PREFIX + "04-mm/"]
+MAX_CATEGORY_PAGES = 350
+WORKERS = 6
+TIMEOUT = 30
 
 class PageParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.text_parts = []
         self.links = []
-        self._anchor = False
+        self.anchors = []
+        self.current_anchor = None
     def handle_starttag(self, tag, attrs):
         if tag == "a":
-            self._anchor = True
             href = dict(attrs).get("href")
-            if href:
-                self.links.append(href)
+            self.current_anchor = {"href": href, "text": []}
     def handle_endtag(self, tag):
-        if tag == "a":
-            self._anchor = False
+        if tag == "a" and self.current_anchor is not None:
+            a = self.current_anchor
+            self.anchors.append({"href": a["href"], "text": " ".join(" ".join(a["text"]).split())})
+            if a["href"]:
+                self.links.append(a["href"])
+            self.current_anchor = None
     def handle_data(self, data):
         s = " ".join(data.split())
         if s:
             self.text_parts.append(s)
+            if self.current_anchor is not None:
+                self.current_anchor["text"].append(s)
 
 def canonical(url):
     p = urlparse(url)
     if p.scheme not in ("http", "https") or p.netloc.lower() not in ("uralplit.ru", "www.uralplit.ru"):
         return None
-    path = p.path or "/"
-    if not path.startswith(PREFIX):
+    if not (p.path.startswith(PREFIX)):
         return None
-    return urlunparse(("https", "uralplit.ru", path, "", p.query, ""))
+    return urlunparse(("https", "uralplit.ru", p.path, "", p.query, ""))
+
+def is_generic_anchor(text):
+    t = re.sub(r"\s+", " ", (text or "").strip().lower())
+    return not t or t in {"image", "перейти в корзину", "в корзину", "купить", "подробнее"} or len(t) < 3
 
 def parse_page(url):
     req = Request(url, headers={
@@ -60,39 +65,74 @@ def parse_page(url):
     parser = PageParser()
     parser.feed(html)
     text = " ".join(parser.text_parts)
-    article = re.search(r"Артикул\s*:?\s*(\d{5,})", text, re.I)
-    qty = re.search(r"Кол-во\s*:?\s*([\d\s\u00a0.,]+?)\s*(м\.?)(?=\s|$)", text, re.I)
-    if article and qty:
+
+    # On category listings, every item has an article and a quantity on the same page.
+    article_matches = list(re.finditer(r"Артикул\s*:?\s*(\d{5,})", text, re.I))
+    title_by_article_index = []
+    product_urls = set()
+    for a in parser.anchors:
+        href = canonical(urljoin(url, a["href"] or ""))
+        if href and not is_generic_anchor(a["text"]):
+            # Product-name anchors are paired with the item sequence in the listing.
+            title_by_article_index.append((a["text"], href))
+            product_urls.add(href)
+
+    products = {}
+    for i, match in enumerate(article_matches):
+        article = match.group(1)
+        next_start = article_matches[i + 1].start() if i + 1 < len(article_matches) else len(text)
+        segment = text[match.end():next_start]
+        qty = re.search(r"Кол-во\s*:?\s*([\d\s\u00a0.,]+?)\s*м\b", segment, re.I)
+        if not qty:
+            continue
         stock_digits = re.sub(r"\D", "", qty.group(1))
-        title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
-        title = re.sub(r"<[^>]+>", " ", title_match.group(1)) if title_match else ""
+        if not stock_digits:
+            continue
+        title = ""
+        product_url = ""
+        if i < len(title_by_article_index):
+            title, product_url = title_by_article_index[i]
+        if not title:
+            before = text[max(0, match.start() - 180):match.start()]
+            title = re.split(r"(?:Перейти в корзину|В корзину)", before, flags=re.I)[-1]
+            title = re.sub(r"\[?Image\]?", " ", title, flags=re.I).strip()[-130:]
         title = " ".join(title.replace("&nbsp;", " ").replace("&amp;", "&").split())
-        width = re.search(r"Ширина,\s*мм\s*:?\s*(\d+)\s*мм", text, re.I)
-        thickness = re.search(r"Толщина,\s*мм\s*:?\s*([\d,.]+)\s*мм", text, re.I)
-        return {
-            "url": url,
-            "article": article.group(1),
+        dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|1[,.]5|1|2)\s*мм", title, re.I)
+        width = int(dim.group(1)) if dim else None
+        thickness = float(dim.group(2).replace(",", ".")) if dim else None
+        products[article] = {
+            "url": product_url or url,
+            "article": article,
             "title": title,
-            "width_mm": int(width.group(1)) if width else None,
-            "thickness_mm": float(thickness.group(1).replace(",", ".")) if thickness else None,
-            "stock_m": int(stock_digits) if stock_digits else 0,
+            "width_mm": width,
+            "thickness_mm": thickness,
+            "stock_m": int(stock_digits),
             "unit": "м",
-        }, []
-    links = []
+        }
+
+    # Don't crawl product pages again: stock is already present in the category listing.
+    category_links = []
     for href in parser.links:
         resolved = canonical(urljoin(url, href))
-        if resolved and resolved not in links:
-            links.append(resolved)
-    return None, links
+        if not resolved or resolved in product_urls:
+            continue
+        # Keep category/filter/pagination links, not arbitrary links with a product-like slug.
+        path = urlparse(resolved).path.rstrip("/")
+        leaf = path.rsplit("/", 1)[-1]
+        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or "PAGEN_" in urlparse(resolved).query:
+            category_links.append(resolved)
+        elif urlparse(resolved).query and path.endswith(PREFIX.rstrip("/")):
+            category_links.append(resolved)
+    return list(products.values()), list(dict.fromkeys(category_links)), len(article_matches)
 
 def main():
     queue = list(STARTS)
     seen = set()
     products = {}
     errors = []
-    while queue and len(seen) < MAX_PAGES:
+    while queue and len(seen) < MAX_CATEGORY_PAGES:
         batch = []
-        while queue and len(batch) < WORKERS * 3 and len(seen) + len(batch) < MAX_PAGES:
+        while queue and len(batch) < WORKERS and len(seen) + len(batch) < MAX_CATEGORY_PAGES:
             u = queue.pop(0)
             if u not in seen:
                 seen.add(u)
@@ -104,19 +144,20 @@ def main():
             for future in as_completed(futures):
                 url = futures[future]
                 try:
-                    product, links = future.result()
-                    if product:
-                        products[product["article"]] = product
-                    else:
-                        for link in links:
-                            if link not in seen and link not in queue:
-                                queue.append(link)
+                    items, links, raw_count = future.result()
+                    for item in items:
+                        products[item["article"]] = item
+                    for link in links:
+                        if link not in seen and link not in queue:
+                            queue.append(link)
                 except Exception as exc:
                     errors.append({"url": url, "error": str(exc)[:240]})
-    if len(seen) >= MAX_PAGES and queue:
-        raise SystemExit(f"Safety limit reached ({MAX_PAGES} pages) before crawl completed; refusing to publish partial stock.")
-    if len(products) < 10:
-        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} pages; refusing to publish incomplete stock.")
+    if len(seen) >= MAX_CATEGORY_PAGES and queue:
+        raise SystemExit(f"Safety limit reached ({MAX_CATEGORY_PAGES} category pages); refusing to publish partial stock.")
+    if len(products) < 100:
+        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} category pages; refusing to publish incomplete stock.")
+    if errors and len(errors) > max(3, int(len(seen) * 0.1)):
+        raise SystemExit(f"Too many category page errors ({len(errors)}/{len(seen)}); refusing to publish partial stock.")
     output = {
         "source": STARTS,
         "region": "Екатеринбург",
