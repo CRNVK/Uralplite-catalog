@@ -58,7 +58,7 @@ jobs:
             "interval_days": 4,
             "schedule_note": "Daily GitHub Actions check; catalog sync runs only when four days have elapsed."
           }
-          open(p, "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False, indent=2) + "\\n")
+          open(p, "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False, indent=2) + chr(10))
           PY
       - name: Commit updated catalog index
         if: steps.cadence.outputs.run == 'true'
