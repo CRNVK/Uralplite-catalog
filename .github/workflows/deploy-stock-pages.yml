@@ -1,5 +1,14 @@
 name: Deploy stock-enabled catalog to GitHub Pages
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "stock/index.html"
+      - "with-stock/index.html"
+      - "decor-mappings.json"
+      - ".github/workflows/deploy-stock-pages.yml"
   workflow_run:
     workflows:
       - Refresh UralPlit stock snapshot
@@ -17,7 +26,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
