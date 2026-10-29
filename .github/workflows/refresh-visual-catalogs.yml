@@ -36,5 +36,6 @@ jobs:
             echo "No visual catalog changes."
           else
             git commit -m "Refresh official visual decor catalog"
+            git pull --rebase origin main
             git push
           fi
