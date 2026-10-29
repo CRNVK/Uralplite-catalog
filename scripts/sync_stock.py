@@ -14,8 +14,8 @@ BASE = "https://uralplit.ru"
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
 CATALOG_ROOT = "/shop/kromochnye-materialy/"
 STARTS = [BASE + CATALOG_ROOT]
-MAX_CATEGORY_PAGES = 60
-WORKERS = 4
+MAX_CATEGORY_PAGES = 100
+WORKERS = 6
 TIMEOUT = 20
 
 class PageParser(HTMLParser):
