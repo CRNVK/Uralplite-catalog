@@ -25,6 +25,7 @@ MAX_IMAGE_BYTES = 12 * 1024 * 1024
 SOURCES = [
     {"manufacturer": "NORDECO", "index": "https://www.nordeco.design/katalog-dekorov/", "prefix": "https://www.nordeco.design/katalog-dekorov/", "mode": "nordeco"},
     {"manufacturer": "Lamarty", "index": "https://www.lamarty.ru/lamarty/decors/plain.html", "prefix": "https://www.lamarty.ru/lamarty/decors/", "mode": "lamarty"},
+    {"manufacturer": "SWISS KRONO", "index": "https://swisskrono.ru/ldsp.html", "prefix": "https://swisskrono.ru/ldsp_files/", "mode": "swisskrono"},
 ]
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
@@ -125,6 +126,36 @@ def main():
         html = get_html(source["index"])
         if not html:
             errors.append(source["manufacturer"] + ": index unavailable")
+            continue
+        if source["mode"] == "swisskrono":
+            soup = BeautifulSoup(html, "html.parser")
+            found = 0
+            for a in soup.find_all("a", href=True):
+                title = clean(a.get_text(" ", strip=True) or a.get("title") or a.get("aria-label") or "")
+                image_url = urljoin(source["index"], a["href"])
+                # The official SWISS KRONO page links each decor label directly to its sample image.
+                if not title or not re.search(r"\\b(?:[UDK]\\d{3,5})\\b", title, re.I):
+                    continue
+                if not image_url.lower().split("?")[0].endswith((".jpg", ".jpeg", ".png", ".webp")):
+                    continue
+                match = re.search(r"\\b(?:[UDK]\\d{3,5})\\b", title, re.I)
+                decor = clean(re.sub(r"^New\\s+", "", title, flags=re.I))
+                local_image = make_thumbnail(image_url, decor)
+                key = source["manufacturer"].casefold() + "|" + decor.casefold()
+                output[key] = {
+                    "manufacturer": source["manufacturer"],
+                    "decor": decor,
+                    "collection": "Ламинированные плиты ДСП",
+                    "description": "",
+                    "image": local_image,
+                    "source_url": source["index"],
+                    "image_source_url": image_url if local_image else "",
+                    "source_checked_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                }
+                found += 1
+            print(f"  official decor samples discovered: {found}")
+            if found < 10:
+                errors.append(source["manufacturer"] + ": too few decor samples found")
             continue
         links = decor_links(source, html)
         # If a catalog index is JavaScript-heavy, retain only confirmed detail links found in its HTML.
