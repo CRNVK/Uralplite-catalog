@@ -1,0 +1,39 @@
+name: Sync decor mapping data
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "decor-mappings.csv"
+      - "scripts/sync_decor_mappings.py"
+      - ".github/workflows/sync-decor-mappings.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: uralplit-decor-mappings
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate CSV and generate JSON
+        run: python scripts/sync_decor_mappings.py
+      - name: Commit generated JSON if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add decor-mappings.json
+          if git diff --cached --quiet; then
+            echo "Generated JSON is already up to date."
+          else
+            git commit -m "Sync decor mapping JSON from CSV"
+            git pull --rebase origin main
+            git push
+          fi
