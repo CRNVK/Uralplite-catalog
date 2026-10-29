@@ -9,7 +9,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,11 +17,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Read public product page and verify stock parser
-        run: python scripts/stock_probe.py
-      - name: Upload probe result
+      - name: Crawl public UralPlit PVC edge catalog
+        run: python scripts/sync_stock.py
+      - name: Upload stock probe result
         uses: actions/upload-artifact@v4
         with:
           name: uralplit-stock-probe
-          path: stock-probe.json
+          path: stock-data.json
           if-no-files-found: error
