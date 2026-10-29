@@ -14,7 +14,7 @@ BASE = "https://uralplit.ru"
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
 CATALOG_ROOT = "/shop/kromochnye-materialy/"
 STARTS = [BASE + CATALOG_ROOT]
-MAX_CATEGORY_PAGES = 100
+MAX_CATEGORY_PAGES = 60
 WORKERS = 4
 TIMEOUT = 20
 
@@ -177,9 +177,7 @@ def parse_page(url):
         path = parsed.path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
         query = parsed.query
-        if path == CATALOG_ROOT.rstrip("/") and (not query or "PAGEN_" in query):
-            category_links.append(resolved)
-        elif re.fullmatch(r"page\d+", leaf) and path.startswith(CATALOG_ROOT.rstrip("/") + "/"):
+        if re.fullmatch(r"page\d+", leaf) and path.startswith(CATALOG_ROOT.rstrip("/") + "/"):
             category_links.append(resolved)
     return parsed_products, list(dict.fromkeys(category_links)), len(parsed_products)
 
@@ -225,8 +223,8 @@ def main():
         raise SystemExit(f"{len(invalid)} products have invalid title/URL/dimensions; refusing to publish questionable stock.")
     if errors:
         print("Category page errors: " + json.dumps(errors, ensure_ascii=False), flush=True)
-    if errors and len(errors) > max(3, int(len(seen) * 0.1)):
-        raise SystemExit(f"Too many category page errors ({len(errors)}/{len(seen)}); refusing to publish partial stock.")
+    if errors:
+        raise SystemExit(f"Category crawl had {len(errors)} failed pages; refusing to publish partial stock.")
     output = {
         "source": STARTS,
         "region": "Екатеринбург",
