@@ -1,7 +1,8 @@
 name: Refresh UralPlit stock snapshot
 on:
   schedule:
-    - cron: "17 */6 * * *"
+    # Yekaterinburg is UTC+5: weekdays at 09:00, 11:00, 13:00, 15:00, 17:00 and 19:00.
+    - cron: "0 4,6,8,10,12,14 * * 1-5"
   workflow_dispatch:
   push:
     branches:
