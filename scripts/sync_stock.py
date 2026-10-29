@@ -7,13 +7,15 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse, urlunparse
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
+import time
 
 BASE = "https://uralplit.ru"
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
-STARTS = [BASE + PREFIX + "04-mm/"]
-MAX_CATEGORY_PAGES = 350
-WORKERS = 6
-TIMEOUT = 30
+STARTS = [BASE + PREFIX + leaf + "/" for leaf in ("04-mm", "1-mm", "15-mm", "20-mm")]
+MAX_CATEGORY_PAGES = 100
+WORKERS = 4
+TIMEOUT = 20
 
 class PageParser(HTMLParser):
     def __init__(self):
@@ -129,10 +131,26 @@ def parse_page(url):
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
     })
-    with urlopen(req, timeout=TIMEOUT) as response:
-        if response.status != 200:
-            raise RuntimeError(f"HTTP {response.status}")
-        html = response.read().decode("utf-8", errors="replace")
+    html = None
+    for attempt in range(3):
+        try:
+            with urlopen(req, timeout=TIMEOUT) as response:
+                if response.status != 200:
+                    raise RuntimeError(f"HTTP {response.status}")
+                html = response.read().decode("utf-8", errors="replace")
+            break
+        except HTTPError as exc:
+            if exc.code in (400, 404, 410):
+                raise
+            if attempt == 2:
+                raise
+            time.sleep(1.5 * (attempt + 1))
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(1.5 * (attempt + 1))
+    if html is None:
+        raise RuntimeError("Could not download category page after retries")
     parser = PageParser()
     parser.feed(html)
     text = " ".join(parser.text_parts)
@@ -153,7 +171,7 @@ def parse_page(url):
         path = urlparse(resolved).path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
         query = urlparse(resolved).query
-        if leaf in {"04-mm", "1-mm", "15-mm", "20-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
+        if leaf in {"04-mm", "1-mm", "15-mm", "20-mm"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
             category_links.append(resolved)
     return parsed_products, list(dict.fromkeys(category_links)), len(parsed_products)
 
