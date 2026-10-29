@@ -7,13 +7,16 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from urllib.parse import urljoin, urlparse, urlunparse
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
+import time
 
 BASE = "https://uralplit.ru"
 PREFIX = "/shop/kromochnye-materialy/kromka-pvkh-uralplit/"
-STARTS = [BASE + PREFIX + "04-mm/"]
-MAX_CATEGORY_PAGES = 350
-WORKERS = 6
-TIMEOUT = 30
+CATALOG_ROOT = "/shop/kromochnye-materialy/"
+STARTS = [BASE + CATALOG_ROOT]
+MAX_CATEGORY_PAGES = 100
+WORKERS = 4
+TIMEOUT = 20
 
 class PageParser(HTMLParser):
     def __init__(self):
@@ -92,13 +95,16 @@ class ProductCardParser(HTMLParser):
             stock_digits = re.sub(r"\D", "", qty_match.group(1))
             if not stock_digits:
                 continue
-            dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|1[,.]5|1|2)\s*мм", title, re.I)
-            if not dim or not card["url"]:
+            product_url = urljoin(page_url, card["url"]) if card["url"] else ""
+            if not product_url or not urlparse(product_url).path.startswith(PREFIX):
+                continue
+            dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|0[,.]8|1[,.]5|1|2)\s*мм", title, re.I)
+            if not dim:
                 continue
             width = int(dim.group(1))
             thickness = float(dim.group(2).replace(",", "."))
             item = {
-                "url": urljoin(page_url, card["url"]),
+                "url": product_url,
                 "article": article,
                 "title": title,
                 "width_mm": width,
@@ -115,7 +121,8 @@ def canonical(url):
     p = urlparse(url)
     if p.scheme not in ("http", "https") or p.netloc.lower() not in ("uralplit.ru", "www.uralplit.ru"):
         return None
-    if not (p.path.startswith(PREFIX)):
+    allowed_page = p.path == CATALOG_ROOT or bool(re.fullmatch(r"/shop/kromochnye-materialy/page\d+/?", p.path))
+    if not (p.path.startswith(PREFIX) or allowed_page):
         return None
     return urlunparse(("https", "uralplit.ru", p.path, "", p.query, ""))
 
@@ -129,10 +136,26 @@ def parse_page(url):
         "Cache-Control": "no-cache",
         "Pragma": "no-cache",
     })
-    with urlopen(req, timeout=TIMEOUT) as response:
-        if response.status != 200:
-            raise RuntimeError(f"HTTP {response.status}")
-        html = response.read().decode("utf-8", errors="replace")
+    html = None
+    for attempt in range(3):
+        try:
+            with urlopen(req, timeout=TIMEOUT) as response:
+                if response.status != 200:
+                    raise RuntimeError(f"HTTP {response.status}")
+                html = response.read().decode("utf-8", errors="replace")
+            break
+        except HTTPError as exc:
+            if exc.code in (400, 404, 410):
+                raise
+            if attempt == 2:
+                raise
+            time.sleep(1.5 * (attempt + 1))
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(1.5 * (attempt + 1))
+    if html is None:
+        raise RuntimeError("Could not download category page after retries")
     parser = PageParser()
     parser.feed(html)
     text = " ".join(parser.text_parts)
@@ -150,10 +173,13 @@ def parse_page(url):
         if not resolved or resolved in product_urls:
             continue
         # Keep category/filter/pagination links, not arbitrary links with a product-like slug.
-        path = urlparse(resolved).path.rstrip("/")
+        parsed = urlparse(resolved)
+        path = parsed.path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
-        query = urlparse(resolved).query
-        if leaf in {"04-mm", "1-mm", "15-mm", "20-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
+        query = parsed.query
+        if path == CATALOG_ROOT.rstrip("/") and (not query or "PAGEN_" in query):
+            category_links.append(resolved)
+        elif re.fullmatch(r"page\d+", leaf) and path.startswith(CATALOG_ROOT.rstrip("/") + "/"):
             category_links.append(resolved)
     return parsed_products, list(dict.fromkeys(category_links)), len(parsed_products)
 
@@ -187,11 +213,18 @@ def main():
                     errors.append({"url": url, "error": str(exc)[:240]})
     if len(seen) >= MAX_CATEGORY_PAGES and queue:
         raise SystemExit(f"Safety limit reached ({MAX_CATEGORY_PAGES} category pages); refusing to publish partial stock.")
-    if len(products) < 800:
-        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} category pages; expected at least 800 across the 0.4/1/1.5/2 mm PVC categories, refusing to publish incomplete stock.")
-    invalid = [p for p in products.values() if not p.get("title") or not p.get("url") or not p.get("width_mm") or p.get("thickness_mm") not in (0.4, 1.0, 1.5, 2.0)]
+    if len(products) < 900:
+        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} catalog pages; expected at least 900 UralPlit PVC edge items across thicknesses 0.4/0.8/1/1.5/2 mm, refusing to publish incomplete stock.")
+    thickness_counts = {thickness: sum(1 for p in products.values() if p.get("thickness_mm") == thickness) for thickness in (0.4, 0.8, 1.0, 1.5, 2.0)}
+    minimum_by_thickness = {0.4: 190, 0.8: 30, 1.0: 300, 1.5: 15, 2.0: 280}
+    missing_thicknesses = {str(k): {"found": thickness_counts[k], "minimum": v} for k, v in minimum_by_thickness.items() if thickness_counts[k] < v}
+    if missing_thicknesses:
+        raise SystemExit("One or more thickness categories are incomplete: " + json.dumps(missing_thicknesses, ensure_ascii=False))
+    invalid = [p for p in products.values() if not p.get("title") or not p.get("url") or not p.get("width_mm") or p.get("thickness_mm") not in (0.4, 0.8, 1.0, 1.5, 2.0)]
     if invalid:
         raise SystemExit(f"{len(invalid)} products have invalid title/URL/dimensions; refusing to publish questionable stock.")
+    if errors:
+        print("Category page errors: " + json.dumps(errors, ensure_ascii=False), flush=True)
     if errors and len(errors) > max(3, int(len(seen) * 0.1)):
         raise SystemExit(f"Too many category page errors ({len(errors)}/{len(seen)}); refusing to publish partial stock.")
     output = {
