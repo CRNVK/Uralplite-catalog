@@ -1,6 +1,12 @@
 name: Probe UralPlit stock page
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - stock-sync-prototype
+  pull_request:
+    branches:
+      - main
 permissions:
   contents: read
 jobs:
