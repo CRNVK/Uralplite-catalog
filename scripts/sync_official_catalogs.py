@@ -99,7 +99,7 @@ def decor_links(source, html):
 
 def make_thumbnail(image_url, decor_name):
     try:
-        r = SESSION.get(image_url, timeout=TIMEOUT, stream=True)
+        r = SESSION.get(image_url, timeout=(5, 8), stream=True)
         r.raise_for_status()
         data = r.raw.read(MAX_IMAGE_BYTES + 1)
         if len(data) > MAX_IMAGE_BYTES:
@@ -148,7 +148,7 @@ def main():
             local_image = None
             original_image = ""
             # Only use explicit title/alt matches for downloads; generic OG images may be a banner.
-            for image_url, alt, score in candidates:
+            for image_url, alt, score in candidates[:4]:
                 if score >= 5:
                     local_image = make_thumbnail(image_url, title)
                     if local_image:
