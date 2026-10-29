@@ -1,6 +1,9 @@
-name: Probe UralPlit stock page
+name: Validate UralPlit public stock crawler
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - stock-sync-prototype
   pull_request:
     branches:
       - main
