@@ -52,5 +52,6 @@ jobs:
             echo "Stock snapshot has no changes."
           else
             git commit -m "Refresh public UralPlit stock snapshot"
+            git pull --rebase origin main
             git push
           fi
