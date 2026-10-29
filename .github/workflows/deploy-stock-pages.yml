@@ -30,13 +30,17 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Assemble static site
         run: |
-          mkdir -p site/with-stock
+          mkdir -p site/with-stock site/stock
           cp index.html site/index.html
           cp with-stock/index.html site/with-stock/index.html
           cp with-stock/stock-data.json site/with-stock/stock-data.json
+          cp stock/index.html site/stock/index.html
+          cp with-stock/stock-data.json site/stock-data.json
           test -s site/index.html
           test -s site/with-stock/index.html
           test -s site/with-stock/stock-data.json
+          test -s site/stock/index.html
+          test -s site/stock-data.json
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
