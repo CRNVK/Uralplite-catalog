@@ -129,6 +129,11 @@ function showStockDetails(detailRow,edge){
   const meta=document.createElement('div');meta.className='stock-meta';
   meta.textContent='Источник: публичный каталог УралПлит · регион: '+(payload.region||'не указан')+' · проверено: '+formatDate(payload.retrieved_at_utc)+'. Метраж на момент последней успешной проверки, не гарантия остатка в реальном времени.';
   cell.append(meta);
+  if(Number(payload.errors_count)>0){
+   const partial=document.createElement('div');partial.className='stock-warning';
+   partial.textContent='В последней синхронизации не удалось прочитать '+payload.errors_count+' страниц каталога. Список может быть неполным; если нужная кромка не найдена, проверьте её напрямую на сайте УралПлит.';
+   cell.append(partial);
+  }
   const age=Date.now()-new Date(payload.retrieved_at_utc).getTime();
   if(!Number.isFinite(age)||age>12*60*60*1000){
    const warning=document.createElement('div');warning.className='stock-warning';warning.textContent='Внимание: данные старше 12 часов или время проверки неизвестно. Не считайте их подтверждённым текущим остатком.';cell.append(warning);
