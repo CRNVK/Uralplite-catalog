@@ -16,6 +16,9 @@ header{background:var(--white);border-bottom:1px solid #e6e0d9}
 .heading h1{font:600 clamp(22px,3vw,32px)/1.15 'Onest',Arial,sans-serif;margin:0 0 7px}
 .heading p{margin:0;color:#6b625d;font-size:15px}
 main{max-width:1240px;margin:0 auto;padding:28px}
+.version-switch{display:flex;justify-content:flex-end;gap:6px;margin:0 0 14px;font-size:14px;color:var(--muted)}
+.version-switch a{color:var(--red);font-weight:700;text-decoration:none}
+.version-switch a:hover{text-decoration:underline}
 .notice{padding:13px 16px;border-left:4px solid var(--red);background:#fff;border-radius:0 8px 8px 0;margin-bottom:22px;color:#51443e;line-height:1.45}
 .controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(200px,260px);gap:12px;margin-bottom:16px}
 input,select{font:inherit;color:var(--brown);background:#fff;border:1px solid #d7cec6;border-radius:8px;padding:13px 14px;min-width:0;width:100%;outline:none}
@@ -60,6 +63,7 @@ footer{max-width:1240px;margin:auto;padding:0 28px 30px;color:#776c65;font-size:
 <div class="heading"><h1>Подбор кромки к декорам ЛДСП</h1><p>Таблица соответствия декоров производителей и кромки УралПлит</p></div>
 </div></header>
 <main>
+<div class="version-switch"><span>Версия с остатками</span><span>·</span><a href="../">Открыть обычную таблицу</a></div>
 <div class="notice">Таблица носит рекомендательный характер. Перед отгрузкой декора кромки согласуйте подбор с покупателем.</div>
 <div class="controls">
 <input id="search" type="search" placeholder="Поиск по декору, кромке или комментарию…" aria-label="Поиск">
