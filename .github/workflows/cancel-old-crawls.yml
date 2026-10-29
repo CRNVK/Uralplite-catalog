@@ -16,6 +16,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          for run_id in 40875532819 40875515802 40875505523 40875453355; do
+          for run_id in 40875532819 40875515802 40875505523 40875453355 40876038755; do
             gh run cancel "$run_id" --repo CRNVK/Uralplite-catalog || true
           done
