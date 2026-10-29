@@ -8,11 +8,14 @@ on:
       - "stock/index.html"
       - "with-stock/index.html"
       - "decor-mappings.json"
+      - "visual-catalog.json"
+      - "vision/**"
       - ".github/workflows/deploy-stock-pages.yml"
   workflow_run:
     workflows:
       - Refresh UralPlit stock snapshot
       - Sync decor mapping data
+      - Refresh official visual decor catalogs
     types:
       - completed
     branches:
@@ -40,15 +43,20 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Assemble static site
         run: |
-          mkdir -p site/with-stock site/stock
+          mkdir -p site/with-stock site/stock site/vision/catalog-images
           cp index.html site/index.html
           cp decor-mappings.json site/decor-mappings.json
+          cp visual-catalog.json site/visual-catalog.json
           cp with-stock/index.html site/with-stock/index.html
           cp with-stock/stock-data.json site/with-stock/stock-data.json
           cp stock/index.html site/stock/index.html
           cp with-stock/stock-data.json site/stock-data.json
+          cp vision/index.html site/vision/index.html
+          cp vision/catalog-images/* site/vision/catalog-images/ 2>/dev/null || true
           test -s site/index.html
           test -s site/decor-mappings.json
+          test -s site/visual-catalog.json
+          test -s site/vision/index.html
           test -s site/with-stock/index.html
           test -s site/with-stock/stock-data.json
           test -s site/stock/index.html
