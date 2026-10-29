@@ -1,0 +1,56 @@
+name: Refresh UralPlit stock snapshot
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/sync_stock.py"
+      - ".github/workflows/refresh-stock.yml"
+permissions:
+  contents: write
+concurrency:
+  group: uralplit-stock-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Crawl and validate public stock
+        run: python scripts/sync_stock.py
+      - name: Prepare data for the stock-enabled catalog
+        run: |
+          mkdir -p with-stock
+          cp stock-data.json with-stock/stock-data.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("with-stock/stock-data.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          assert data.get("products_count", 0) >= 880
+          assert data.get("errors_count") == 0
+          assert len(data.get("products", [])) == data["products_count"]
+          print(f"Validated {data['products_count']} products; pages={data['pages_checked']}; retrieved_at={data['retrieved_at_utc']}")
+          PY
+      - name: Commit refreshed snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add with-stock/stock-data.json
+          if git diff --cached --quiet; then
+            echo "Stock snapshot has no changes."
+          else
+            git commit -m "Refresh public UralPlit stock snapshot"
+            git push
+          fi
