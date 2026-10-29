@@ -56,16 +56,17 @@ def image_candidates(soup, title, page_url):
         if not src or src.startswith("data:"):
             continue
         alt = clean(img.get("alt") or img.get("title") or "")
-        if not alt:
+        is_lamarty_detail = "lamarty.ru/lamarty/decors/" in page_url
+        if not alt and not is_lamarty_detail:
             continue
         alt_norm = alt.casefold()
-        score = 0
+        score = 5 if (is_lamarty_detail and not alt) else 0
         if title_norm and title_norm in alt_norm: score += 8
         if alt_norm and alt_norm in title_norm: score += 5
         if any(x in alt_norm for x in ("декор", "decor", "ламарти", "nordeco")): score += 1
         if any(x in src.casefold() for x in ("logo", "icon", "banner", "social", "avatar")): score -= 10
         if score > 0:
-            candidates.append((urljoin(page_url, src), alt, score))
+            candidates.append((urljoin(page_url, src), alt or "decor image", score))
     # Deduplicate while preserving the best score. Prefer explicit alt match over generic OG.
     best = {}
     for url, alt, score in candidates:
