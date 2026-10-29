@@ -125,7 +125,7 @@ def parse_page(url):
         # Keep category/filter/pagination links, not arbitrary links with a product-like slug.
         path = urlparse(resolved).path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
-        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or re.fullmatch(r"page\\d+", leaf) or urlparse(resolved).query:
+        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or urlparse(resolved).query:
             category_links.append(resolved)
     return list(products.values()), list(dict.fromkeys(category_links)), len(article_matches)
 
