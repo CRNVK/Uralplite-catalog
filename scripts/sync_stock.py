@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect public UralPlit PVC edge product stock pages for a controlled prototype."""
+"""Collect public UralPlit PVC edge product stock pages for a controlled prototype, tested by CI."""
 import json
 import re
 import sys
