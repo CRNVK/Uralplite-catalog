@@ -93,10 +93,12 @@ class ProductCardParser(HTMLParser):
             if not stock_digits:
                 continue
             dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|1[,.]5|1|2)\s*мм", title, re.I)
-            width = int(dim.group(1)) if dim else None
-            thickness = float(dim.group(2).replace(",", ".")) if dim else None
+            if not dim or not card["url"]:
+                continue
+            width = int(dim.group(1))
+            thickness = float(dim.group(2).replace(",", "."))
             item = {
-                "url": urljoin(page_url, card["url"]) if card["url"] else page_url,
+                "url": urljoin(page_url, card["url"]),
                 "article": article,
                 "title": title,
                 "width_mm": width,
@@ -151,7 +153,7 @@ def parse_page(url):
         path = urlparse(resolved).path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
         query = urlparse(resolved).query
-        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
+        if leaf in {"04-mm", "1-mm", "15-mm", "20-mm", "2-mm", "kromka-pvkh-uralplit"} or (leaf.startswith("page") and leaf[4:].isdigit()) or "PAGEN_" in query:
             category_links.append(resolved)
     return parsed_products, list(dict.fromkeys(category_links)), len(parsed_products)
 
@@ -185,8 +187,11 @@ def main():
                     errors.append({"url": url, "error": str(exc)[:240]})
     if len(seen) >= MAX_CATEGORY_PAGES and queue:
         raise SystemExit(f"Safety limit reached ({MAX_CATEGORY_PAGES} category pages); refusing to publish partial stock.")
-    if len(products) < 100:
-        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} category pages; refusing to publish incomplete stock.")
+    if len(products) < 800:
+        raise SystemExit(f"Only {len(products)} products parsed from {len(seen)} category pages; expected at least 800 across the 0.4/1/1.5/2 mm PVC categories, refusing to publish incomplete stock.")
+    invalid = [p for p in products.values() if not p.get("title") or not p.get("url") or not p.get("width_mm") or p.get("thickness_mm") not in (0.4, 1.0, 1.5, 2.0)]
+    if invalid:
+        raise SystemExit(f"{len(invalid)} products have invalid title/URL/dimensions; refusing to publish questionable stock.")
     if errors and len(errors) > max(3, int(len(seen) * 0.1)):
         raise SystemExit(f"Too many category page errors ({len(errors)}/{len(seen)}); refusing to publish partial stock.")
     output = {
