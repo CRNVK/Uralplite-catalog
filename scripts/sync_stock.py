@@ -70,12 +70,18 @@ def parse_page(url):
     article_matches = list(re.finditer(r"Артикул\s*:?\s*(\d{5,})", text, re.I))
     title_by_article_index = []
     product_urls = set()
+    category_leaves = {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"}
     for a in parser.anchors:
         href = canonical(urljoin(url, a["href"] or ""))
-        if href and not is_generic_anchor(a["text"]):
-            # Product-name anchors are paired with the item sequence in the listing.
-            title_by_article_index.append((a["text"], href))
-            product_urls.add(href)
+        if not href or is_generic_anchor(a["text"]):
+            continue
+        parsed_href = urlparse(href)
+        leaf = parsed_href.path.rstrip("/").rsplit("/", 1)[-1]
+        if leaf in category_leaves or "PAGEN_" in parsed_href.query:
+            continue
+        # Product-name anchors are paired with article/quantity blocks in document order.
+        title_by_article_index.append((a["text"], href))
+        product_urls.add(href)
 
     products = {}
     for i, match in enumerate(article_matches):
@@ -119,9 +125,7 @@ def parse_page(url):
         # Keep category/filter/pagination links, not arbitrary links with a product-like slug.
         path = urlparse(resolved).path.rstrip("/")
         leaf = path.rsplit("/", 1)[-1]
-        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or "PAGEN_" in urlparse(resolved).query:
-            category_links.append(resolved)
-        elif urlparse(resolved).query and path.endswith(PREFIX.rstrip("/")):
+        if leaf in {"04-mm", "1-mm", "15-mm", "2-mm", "kromka-pvkh-uralplit"} or urlparse(resolved).query:
             category_links.append(resolved)
     return list(products.values()), list(dict.fromkeys(category_links)), len(article_matches)
 
