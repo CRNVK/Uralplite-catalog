@@ -83,16 +83,16 @@ class ProductCardParser(HTMLParser):
         found = {}
         for card in self.cards:
             body = " ".join(card["text"])
-            article_match = re.search(r"Артикул\\s*:?\\s*(\\d{5,})", body, re.I)
-            qty_match = re.search(r"Кол-во\\s*:?\\s*([\\d\\s\\u00a0.,]+?)\\s*м\\b", body, re.I)
+            article_match = re.search(r"Артикул\s*:?\s*(\d{5,})", body, re.I)
+            qty_match = re.search(r"Кол-во\s*:?\s*([\d\s\u00a0.,]+?)\s*м\b", body, re.I)
             title = " ".join(" ".join(card["title_parts"]).split())
             if not article_match or not qty_match or not title:
                 continue
             article = article_match.group(1)
-            stock_digits = re.sub(r"\\D", "", qty_match.group(1))
+            stock_digits = re.sub(r"\D", "", qty_match.group(1))
             if not stock_digits:
                 continue
-            dim = re.search(r"(\\d{2})\\s*[/x×]\\s*(0[,.]4|1[,.]5|1|2)\\s*мм", title, re.I)
+            dim = re.search(r"(\d{2})\s*[/x×]\s*(0[,.]4|1[,.]5|1|2)\s*мм", title, re.I)
             width = int(dim.group(1)) if dim else None
             thickness = float(dim.group(2).replace(",", ".")) if dim else None
             item = {
