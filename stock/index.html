@@ -46,8 +46,10 @@ tbody tr.data-row[aria-expanded="true"]{background:#f7efe7}
 .stock-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid #eee8e2;border-radius:7px;background:#fffdfb}
 .stock-size{font-weight:700;color:#665a53;white-space:nowrap}
 .stock-amount{font:700 16px 'Onest',Arial,sans-serif;color:#38221c;text-align:right;white-space:nowrap}
-.stock-item a{color:inherit;text-decoration:none}
+.stock-item a{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-width:0;color:inherit;text-decoration:none}
 .stock-item a:hover .stock-amount{text-decoration:underline;color:#941a18}
+.stock-size{flex:0 0 auto}
+.stock-amount{margin-left:auto}
 .stock-empty{color:#756d68;padding:8px 0}
 @media(max-width:650px){.stock-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:8px}.stock-item{padding:9px 8px;gap:6px}.stock-amount{font-size:14px}}
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin:20px 0 8px;flex-wrap:wrap}
