@@ -107,7 +107,7 @@ async function loadDecorMappings(){
  }
 }
 function norm(s){return String(s||'').toLocaleLowerCase('ru').normalize('NFKC')}
-function keyTokens(s){return norm(s).replace(/ё/g,'е').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean)}
+function keyTokens(s){return norm(s).replace(/ё/g,'е').replace(/\b(kws|ws|wh|kw|abs)[\s._-]*(\d{3,4})\b/gi,'$1 $2').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean)}
 function filtered(){
  const q=norm(search.value),m=manufacturer.value;
  return data.filter(r=>(!m||r.manufacturer===m)&&(!q||norm([r.manufacturer,r.decor,r.edge,r.comment].join(' ')).includes(q)))
