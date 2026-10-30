@@ -1,0 +1,38 @@
+name: Discover official decor catalogues
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "catalog-sources.json"
+      - "scripts/discover_official_catalogs.py"
+      - ".github/workflows/discover-official-catalogs.yml"
+permissions:
+  contents: write
+concurrency:
+  group: official-decor-catalog-discovery
+  cancel-in-progress: false
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Discover public catalogue metadata
+        run: python scripts/discover_official_catalogs.py
+      - name: Commit discovery snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog-discovery.json
+          if git diff --cached --quiet; then
+            echo "No catalogue metadata changes."
+          else
+            git commit -m "Refresh official decor catalogue discovery"
+            git pull --rebase origin main
+            git push
+          fi
