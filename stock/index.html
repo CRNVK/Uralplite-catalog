@@ -164,7 +164,7 @@ function showStockDetails(detailRow,edge){
   }
   const groups=new Map();
   matches.forEach(p=>{
-   const codeMatch=String(p.title||'').match(/\\b(WS|WH)\\s*(\\d{3,4})\\b/i);
+   const codeMatch=String(p.title||'').match(/\b(WS|WH)\s*(\d{3,4})\b/i);
    const code=codeMatch?(codeMatch[1].toUpperCase()+' '+codeMatch[2]):'Кромка без кода WS/WH';
    if(!groups.has(code))groups.set(code,[]);
    groups.get(code).push(p);
