@@ -1,0 +1,1077 @@
+{
+  "checked_at": "2026-10-30T03:48:21.426370+00:00",
+  "sources": [
+    {
+      "id": "nordeco",
+      "manufacturer": "NORDECO design",
+      "url": "https://nordeco.design/katalog-dekorov/",
+      "mode": "html_catalog",
+      "enabled": true,
+      "notes": "Public decor cards expose names, collection, category, surface structure and decor detail pages. Inspect image rights before mirroring.",
+      "status": "ok",
+      "decor_links": [
+        {
+          "url": "https://nordeco.design/katalog-dekorov/",
+          "label": "Каталог декоров"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/#decorsDownload",
+          "label": "Скачать декоры"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/#v26productForm",
+          "label": "Заявка на продукцию"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/filter/clear/apply/",
+          "label": "Показать"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/travertin/",
+          "label": "NEW     Травертин"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/petra/",
+          "label": "NEW     Петра"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kaylo/",
+          "label": "NEW     Кайло"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/oksidian/",
+          "label": "NEW     Оксидиан"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/salvador/",
+          "label": "NEW     Сальвадор"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-turin-svetlyy/",
+          "label": "NEW     Дуб Турин светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/rokvud/",
+          "label": "NEW     Роквуд"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-turin-temnyy/",
+          "label": "NEW     Дуб Турин темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kayman-svetlyy/",
+          "label": "NEW     Кайман светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kayman-temnyy/",
+          "label": "NEW     Кайман темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-turin-chernyy/",
+          "label": "NEW     Дуб Турин черный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/indigo/",
+          "label": "NEW     Индиго"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/sapfir/",
+          "label": "NEW     Сапфир"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dymchatyy-goluboy/",
+          "label": "NEW     Дымчатый Голубой"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/nebesno-goluboy/",
+          "label": "NEW     Небесно-голубой"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yarko-zheltyy/",
+          "label": "NEW     Яркий Желтый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/shalfey/",
+          "label": "NEW     Шалфей"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/patina/",
+          "label": "NEW     Патина"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/khaki/",
+          "label": "NEW     Хаки"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/svetlo-zelenyy/",
+          "label": "NEW     Светло-зеленый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/abrikos/",
+          "label": "NEW     Абрикос"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/terrakota/",
+          "label": "NEW     Терракота"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/bordo/",
+          "label": "NEW     Бордо"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kalina/",
+          "label": "NEW     Калина"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/sakura/",
+          "label": "NEW     Сакура"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/sirenevyy/",
+          "label": "NEW     Сиреневый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/lavandovyy/",
+          "label": "NEW     Лавандовый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/limonnyy/",
+          "label": "NEW     Лимонный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/grevi/",
+          "label": "Греви"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-chankli/",
+          "label": "Дуб Чанкли"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/levo/",
+          "label": "Лево"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-patinato/",
+          "label": "Дуб Патинато"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/venis/",
+          "label": "Венис"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-omega-temnyy/",
+          "label": "Дуб Омега темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-omega-svetlyy/",
+          "label": "Дуб Омега светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-kataniya/",
+          "label": "Дуб Катания"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/sand/",
+          "label": "Сэнд"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/pylnyy-rozovyy/",
+          "label": "Пыльный Розовый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/greydzh/",
+          "label": "Грейдж"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/taup/",
+          "label": "Тауп"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/slivochnyy/",
+          "label": "Сливочный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kashemir/",
+          "label": "Кашемир"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/seryy-kamen/",
+          "label": "Серый Камень"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/seryy-dymchatyy/",
+          "label": "Серый Дымчатый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/pasiphae/",
+          "label": "Пасифай"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dymchatyy-zelenyy/",
+          "label": "Дымчатый Зеленый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/grafit/",
+          "label": "Графит"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/oniks/",
+          "label": "Оникс"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/faerstoun/",
+          "label": "Файерстоун"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-mauvella/",
+          "label": "Дуб Маувелла"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-garden-svetlyy/",
+          "label": "Дуб Гарден светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-garden-tyemnyy/",
+          "label": "Дуб Гарден темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-delano-naturalnyy/",
+          "label": "Дуб Делано натуральный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yustus/",
+          "label": "Юстус"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/zeydan/",
+          "label": "Зейдан"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-votan/",
+          "label": "Дуб Вотан"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-kharbor/",
+          "label": "Дуб Харбор белый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasen-ankor-belyy/",
+          "label": "Ясень Анкор белый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasen-ankor-svetlyy/",
+          "label": "Ясень Анкор светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasen-ankor-tyemnyy/",
+          "label": "Ясень Анкор темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/vinterberg/",
+          "label": "Винтерберг"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasmund/",
+          "label": "Ясмунд"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-toskana-dymchatyy/",
+          "label": "Дуб Тоскана дымчатый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-aprelskiy-nordik/",
+          "label": "Дуб Апрельский нордик"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/bodega-belyy/",
+          "label": "Бодега Белый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-shamoni-svetlyy/",
+          "label": "Дуб Шамони светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-atlanta/",
+          "label": "Дуб Атланта"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/sosna-skandinaviya/",
+          "label": "Сосна Скандинавия"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasen-shimo-svetlyy/",
+          "label": "Ясень Шимо светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kronberg/",
+          "label": "Кронберг"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/vyaz-shveytsarskiy-svetlyy/",
+          "label": "Вяз Швейцарский"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-sonoma-001/",
+          "label": "Дуб Сонома 001"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/bunratti/",
+          "label": "Бунратти"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasen-orinoko/",
+          "label": "Ясень Ориноко"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/pikhta-serebristaya/",
+          "label": "Пихта Серебристая"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-chesterfild-003/",
+          "label": "Дуб Честерфилд 003"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/yasen-shimo-tyemnyy/",
+          "label": "Ясень Шимо темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-delano/",
+          "label": "Дуб Делано темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/taksoniya-medovaya/",
+          "label": "Таксония Медовая"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/taksoniya-shokoladnaya/",
+          "label": "Таксония Шоколадная"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-samdal/",
+          "label": "Дуб Самдал"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/buk-bavariya-svetlyy/",
+          "label": "Бук Бавария светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/noche-gvarneri/",
+          "label": "Ноче Гварнери"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/noche-ekko/",
+          "label": "Ноче Экко"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-shamoni-tyemnyy/",
+          "label": "Дуб Шамони темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/venge-tsavo/",
+          "label": "Венге Цаво"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/dub-aprelskiy-shokoladnyy/",
+          "label": "Дуб Апрельский шоколадный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/tsement-svetlyy/",
+          "label": "Цемент Светлый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/tsement-tyemnyy/",
+          "label": "Цемент Темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/findus-bezhevyy/",
+          "label": "Финдус Бежевый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/metropolitan/",
+          "label": "Метрополитан"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/belyy-zhemchug/",
+          "label": "Белый Жемчуг"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/platina/",
+          "label": "Платина"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/titan/",
+          "label": "Титан"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/svetlo-seryy/",
+          "label": "Светло-серый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/super-belyy/",
+          "label": "Супер Белый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/belyy-lotos/",
+          "label": "Белый Лотос"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/belyy/",
+          "label": "Белый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/bezh-kameo/",
+          "label": "Беж Камео"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/bezhevyy/",
+          "label": "Бежевый"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/kapuchino/",
+          "label": "Капучино"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/seryy-tyemnyy/",
+          "label": "Серый Темный"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/chernyy/",
+          "label": "Уни Неро"
+        },
+        {
+          "url": "https://nordeco.design/katalog-dekorov/adriatica/",
+          "label": "Адриатика                  Коллекция NORDECO design включается в себя широкую гамму популярных декоров и тиснений,\n\t\t\tисполненных на плите с пониженным содержанием формальдегида (к"
+        }
+      ],
+      "image_references": [
+        {
+          "url": "https://mc.yandex.ru/watch/85835809",
+          "alt": ""
+        },
+        {
+          "url": "https://www.facebook.com/tr?id=3073056743022625&ev=PageView&noscript=1",
+          "alt": ""
+        },
+        {
+          "url": "https://nordeco.design/local/templates/.default/img/logo.png",
+          "alt": ""
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/edc/p5970qsyl6mcua2eaqtggq0k5efqa30m/%D0%A2%D1%80%D0%B0%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D0%BD.jpg",
+          "alt": "Травертин"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/c0e/rgrc492brue2yi46cie8olyr1ljhm8pm/%D0%94%D0%B5%D0%BA%D0%BE%D1%80%20Nordeco%20%D0%9F%D0%B5%D1%82%D1%80%D0%B0.jpg",
+          "alt": "Петра"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/6cd/5o81dkt1x6gz1rbrm6um0hd73n8kvt2n/%D0%9A%D0%B0%D0%B9%D0%BB%D0%BE.jpg",
+          "alt": "Кайло"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/9d8/9hpw8udg5psq988jan76chdjrylh3lte/%D0%9E%D0%BA%D1%81%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD.jpg",
+          "alt": "Оксидиан"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/214/v50vxyo5zxb5oo9z1umzjus93w4cen0s/%D0%A1%D0%B0%D0%BB%D1%8C%D0%B2%D0%B0%D0%B4%D0%BE%D1%80.jpg",
+          "alt": "Сальвадор"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/4f8/5c64hihn4efqkdjtsuq5e764z7pfxzaq/%D0%94%D1%83%D0%B1%20%D0%A2%D1%83%D1%80%D0%B8%D0%BD%20%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D1%8B%D0%B9.jpg",
+          "alt": "Дуб Турин светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/137/4kqrdg1ogk87bx47vlo69xd49l73y97j/%D0%91%D0%B5%D0%B7%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-1.jpg",
+          "alt": "Роквуд"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/2e9/7eghpyu5a4dqkeafer25925o31l80318/%D0%94%D1%83%D0%B1%20%D0%A2%D1%83%D1%80%D0%B8%D0%BD%20%D1%82%D0%B5%D0%BC%D0%BD%D1%8B%D0%B9.jpg",
+          "alt": "Дуб Турин темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/ded/d4z2korn37xbyrbybhitwsny4mtlhlzq/%D0%9A%D0%B0%D0%B9%D0%BC%D0%B0%D0%BD%20%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D1%8B%D0%B9.jpg",
+          "alt": "Кайман светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/c0d/59zozy2kp973nrotflylj1o5xx2tr4ei/%D0%9A%D0%B0%D0%B9%D0%BC%D0%B0%D0%BD%20%D1%82%D0%B5%D0%BC%D0%BD%D1%8B%D0%B9.jpg",
+          "alt": "Кайман темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/7b4/ureqhy00vc5dncqy557c6b8009e0lz1u/%D0%94%D1%83%D0%B1%20%D0%A2%D1%83%D1%80%D0%B8%D0%BD%20%D1%87%D0%B5%D1%80%D0%BD%D1%8B%D0%B9.jpg",
+          "alt": "Дуб Турин черный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/98c/oz6wxlds4aq5zkmyz3521s5ql1v7nj1c/%D0%BE%D0%B1%D1%81%D0%B8%D0%B4%D0%B8%D0%B0%D0%BD1.jpg",
+          "alt": "Индиго"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/fd1/2tafaxf5qau0v5chnc596lzeowe96qua/%D1%81%D0%B0%D0%BF%D1%84%D0%B8%D1%80.jpg",
+          "alt": "Сапфир"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/b1f/0jsljsdyrtv213os4s87xnzptj3poyac.jpg",
+          "alt": "Дымчатый Голубой"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/3a6/z4dgtvaork2rmkziqq268kyiasejimrp.jpg",
+          "alt": "Небесно-голубой"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/bfa/llml2u2ptmeq27aygocil760990l67mu/%D0%AF%D1%80%D0%BA%D0%BE-%D0%B6%D0%B5%D0%BB%D1%82%D1%8B%D0%B92.jpg",
+          "alt": "Яркий Желтый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/13f/gfk52ls09igt84i66mv7r5ywxy48vzs8/%D1%88%D0%B0%D0%BB%D1%84%D0%B5%D0%B9.jpg",
+          "alt": "Шалфей"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/565/d9xggjpq8ih9nfqlgmewotg4bfn5v7re/%D0%9F%D0%B0%D1%82%D0%B8%D0%BD%D0%B012.jpg",
+          "alt": "Патина"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/c25/dyk5aqhb9lcs7k14p14s1a3r723c3k9o/%D1%85%D0%B0%D0%BA%D0%B81.jpg",
+          "alt": "Хаки"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/996/9rgy3tanafs5791mvdjn41vu3t047jam/%D1%81%D0%B2-%D0%B7%D0%B5%D0%BB.jpg",
+          "alt": "Светло-зеленый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/64e/0533cp1bpo6s0cpwt5kkzinf665hykny/%D0%90%D0%B1%D1%80%D0%B8%D0%BA%D0%BE%D1%81.jpg",
+          "alt": "Абрикос"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/dfc/u3h8qe3lflv7y89kydx0pa907jsyijpo.jpg",
+          "alt": "Терракота"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/6e2/73l4o6828ifb64jvolmwq6mvzabwp1l4.jpg",
+          "alt": "Бордо"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/bc5/lsfu2f0lcy4ovs9mct45h69izhc0oryx/%D0%BA%D0%B0%D0%BB%D0%B8%D0%BD%D0%B0.jpg",
+          "alt": "Калина"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/fff/3uu9fi6e5llyodndvec0jc4evqjx5pde.jpg",
+          "alt": "Сакура"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/19a/m9k73na1jk2260defquc448bwd73grzp.jpg",
+          "alt": "Сиреневый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/cbe/kv4sdh985j2zuq1n2hkxlxzmjzcucxzx.jpg",
+          "alt": "Лавандовый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/c61/q7rh3mjhhii4g7aiypb0j1t91l4boc5g.jpg",
+          "alt": "Лимонный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/811/b25ccghemnrloaom46z5wvz9puc04bep.jpg",
+          "alt": "Греви"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/2fc/j83979m80mipl3xil9sron11xmrol2kc.jpg",
+          "alt": "Дуб Чанкли"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/ae0/ket77pyz4ipfddmxbzkncl9oiljnyig6.jpg",
+          "alt": "Лево"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/db2/h1m8odzq3udipe37x3y9xlmqj50yn422.jpg",
+          "alt": "Дуб Патинато"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/03b/6vbvjlcgnatmi7rffa0ohxyc2ze9z6kb.jpg",
+          "alt": "Венис"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/c68/7yatzx5rvdj0d3i0dxyrja86zs9y6np2.jpg",
+          "alt": "Дуб Омега темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/929/nmfibl396t2hiv9j62e3g55n2c038hfl.jpg",
+          "alt": "Дуб Омега светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/f2b/40rllpth2et2yyt1gevbusjcjzt45c13.jpg",
+          "alt": "Дуб Катания"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/806/xw3d7sh4borzo8e6at7snvzdoz4x8h3k.jpg",
+          "alt": "Сэнд"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/248/zvi00hh3z97ceecxesers6x3d7z0dagz.jpg",
+          "alt": "Пыльный Розовый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/66b/cqrqvn8jrpva0zhv2i9mfcdboychz2xm.png",
+          "alt": "Грейдж"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/d18/7xivcnyo3jwzw7todm35fqj7cqe63oaj.png",
+          "alt": "Тауп"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/66b/66ba59ad29695cd95aa867ffffa27396.png",
+          "alt": "Сливочный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/887/887cbfe21d03effb08e2966b7c1bb15a.jpg",
+          "alt": "Кашемир"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/72f/msoa12v9jlqkk018vwu959ab4weuujv5.jpg",
+          "alt": "Серый Камень"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/8b3/8b388b1ecc7ecc94a40f7bb7600dd15d.jpg",
+          "alt": "Серый Дымчатый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/f7f/vwsvo6i13xr6kk20cg7ff5dux4h5du3x.jpg",
+          "alt": "Пасифай"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/145/gba6xn6nodc3tms72spgevs4e0x5dgc9.jpg",
+          "alt": "Дымчатый Зеленый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/cc3/cc370a6b40e8a2e83c21a4fb7b97add9.png",
+          "alt": "Графит"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/815/o4k6xd3awnwu5e3gzeeostkh6fc722p5.jpg",
+          "alt": "Оникс"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/8f2/0do1iwu38oygg15gpzed2ua5kig37z9x.jpg",
+          "alt": "Файерстоун"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/276/3y13m0g3xdfv2woa6pulnfkiqqdho5u3.jpg",
+          "alt": "Дуб Маувелла"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/f9b/km3bk5ktt0ayrra209v49oqujklpz1os.jpg",
+          "alt": "Дуб Гарден светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/ece/aifyx8lbnm32yizib7engipzdb0acoqk.jpg",
+          "alt": "Дуб Гарден темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/1b3/ca35ytyrfebkrpo537qvwg4xz1x0e5wr.jpg",
+          "alt": "Дуб Делано натуральный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/883/0nq7x8h3ymy23t31oayemx095utb50v3.jpg",
+          "alt": "Юстус"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/40e/e01m5voujl9oklzojpnwjm1j8zzaz6aa.jpg",
+          "alt": "Зейдан"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/63b/birf769dhdtm0msbhtptjrv33hnye4yv.jpg",
+          "alt": "Дуб Вотан"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/001/2hey0savpqsuhthbetedmq7n1t5ttosf.jpg",
+          "alt": "Дуб Харбор белый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/110/rf7sochfnf10mraumy30845oelws2wsv.jpg",
+          "alt": "Ясень Анкор белый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/fe1/2iwnyb8p16w7udlp1fsip5ku1n9x8x0o.jpg",
+          "alt": "Ясень Анкор светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/a97/4abnco9zvl94mo36hk96jslhgzw31s8g.jpg",
+          "alt": "Ясень Анкор темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/a9f/yc80pd7ovucj2gqdhwq00nbb3w8a1nqi.jpg",
+          "alt": "Винтерберг"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/aed/yl57zgu7fcz3xbpk0rifk0rp1gjwwk88.jpg",
+          "alt": "Ясмунд"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/649/242r55hp8n5w62guigzi8v1ot7txyk8l.jpg",
+          "alt": "Дуб Тоскана дымчатый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/774/5z7t63tpu9dtsciishhm3o9bhzkenjq0.jpg",
+          "alt": "Дуб Апрельский нордик"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/318/p3i3fjy9ud85mlbyfakpibx8iwrpcaqx.jpg",
+          "alt": "Бодега Белый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/e34/r4rbcwtfq9a4uk3hrwbzj78m6grcxx4n.jpg",
+          "alt": "Дуб Шамони светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/abe/wrljn6upq12fcg17e6sd2c8p1ni6ema5.jpg",
+          "alt": "Дуб Атланта"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/7d5/9bn3ylteqxn0u91hqf2xnso6opnw1oog.jpg",
+          "alt": "Сосна Скандинавия"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/789/xb4v9d3wa7ifd8g975wewvq029b7ldd9/%D0%AF%D1%81%D0%B5%D0%BD%D1%8C%20%D0%A8%D0%B8%D0%BC%D0%BE%20%D1%81%D0%B2%D0%B5%D1%82%D0%BB%D1%8B%D0%B9.jpg",
+          "alt": "Ясень Шимо светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/e52/712e8lhcapdfud4hqreee17zpfox25pd.jpg",
+          "alt": "Кронберг"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/95a/txbdt412zx8hvmqij4dfi6s25kyvesoo.jpg",
+          "alt": "Вяз Швейцарский"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/31a/w3cb1yr9ku0mbg0njx7j40ir6zyggodg.jpg",
+          "alt": "Дуб Сонома 001"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/48f/sjzgi9133sygapl9f329l20tmtj6937t.jpg",
+          "alt": "Бунратти"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/127/s0edsh7ijw56lzalkq3qaqqulvqm6g66.jpg",
+          "alt": "Ясень Ориноко"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/1f5/rlicei5lp7ynmk3476i2apr688ttgo00.jpg",
+          "alt": "Пихта Серебристая"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/45d/8iwpq5ocx16qlpo9pwrrtmvr7hhwglkj.jpg",
+          "alt": "Дуб Честерфилд 003"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/2fd/vrl8lofwztwbrv7jlsdavnaekkiwl46f/%D0%AF%D1%81%D0%B5%D0%BD%D1%8C%20%D0%A8%D0%B8%D0%BC%D0%BE%20%D1%82%D0%B5%D0%BC%D0%BD%D1%8B%D0%B9.jpg",
+          "alt": "Ясень Шимо темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/f48/k2to5b5ujqk718vq2yi0tqiwheeyszmq.jpg",
+          "alt": "Дуб Делано темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/5c6/sflmuupi1sj6xzdd11zkey662clomtuo.jpg",
+          "alt": "Таксония Медовая"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/08e/00p2c2ku4w57cpld04qzym40ppl8i185.jpg",
+          "alt": "Таксония Шоколадная"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/90f/j9rg0oog2y2fvonnwhbyn0odssfbx783.jpg",
+          "alt": "Дуб Самдал"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/9f0/k53p1t09wjm8q1q0gb0u6mjsa4j9jju3.jpg",
+          "alt": "Бук Бавария светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/b83/lqbi5k5jyeyuijpiwobaqkjdh9rfy3hm/%D0%9D%D0%BE%D1%87%D0%B5%20%D0%93%D0%B2%D0%B0%D1%80%D0%BD%D0%B5%D1%80%D0%B8.jpg",
+          "alt": "Ноче Гварнери"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/133/q3yr32jqc0i7t6idqyrizmm6acoyrl8p/%D0%9D%D0%BE%D1%87%D0%B5%20%D0%AD%D0%BA%D0%BA%D0%BE.jpg",
+          "alt": "Ноче Экко"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/488/bxus7y3rwddx8h1qm4uk5nb9fzzhat7b.jpg",
+          "alt": "Дуб Шамони темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/f80/p9shvowbnop4nd0ove4bgjrws1ve0sc4.jpg",
+          "alt": "Венге Цаво"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/c1e/wohhobjwpowa3fip5i196soczdwv62lk.jpg",
+          "alt": "Дуб Апрельский шоколадный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/ad8/il2wjlsksulfmli8aq91n1k3hx84qvye.jpg",
+          "alt": "Цемент Светлый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/550/sxvk7majpbusqu8vluxndh0yjeihl8jh.jpg",
+          "alt": "Цемент Темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/bbc/bzi63nl30mhxzg4jwqwh5qtl5c3cmb4t.jpg",
+          "alt": "Финдус Бежевый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/1ca/tu0ceqm4k045ws2nbr2dntpv95n3v2di.jpg",
+          "alt": "Метрополитан"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/622/dcsxa7wfs6xx8rgz0decbd3edwayexzj.jpg",
+          "alt": "Белый Жемчуг"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/6ff/7zxouv0qfo77sc5xyyupys9mg3w9ie3u.png",
+          "alt": "Платина"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/6e1/hyn5fckxae1zr764ndmfeq1w03agoj7r.jpg",
+          "alt": "Титан"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/e33/8mc257w7wexil8oyx7xsn8a20q2xyel2.jpg",
+          "alt": "Светло-серый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/877/m6qgll2d2scnmhdxnw62q2o0y2o0eolm.png",
+          "alt": "Супер Белый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/3e8/6hi1hi6y6qq8iv2kt2wyryqvn196vn20.png",
+          "alt": "Белый Лотос"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/80b/xx9h9cfefxz7q8bcs9jx3bjglw374hbb.png",
+          "alt": "Белый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/992/99217049d3fd23681f1754ff85f2192c.jpg",
+          "alt": "Беж Камео"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/688/68853af26f559a72eec3d8140280898e.jpg",
+          "alt": "Бежевый"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/a66/907p7kum0nw29enltt5rtfgqkayzbbeq.jpg",
+          "alt": "Капучино"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/4a5/4a538e280f439b207a6c0e69111ee14f.jpg",
+          "alt": "Серый Темный"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/516/5160dd2d44b1e96ab54cbc3442836c3b.jpg",
+          "alt": "Уни Неро"
+        },
+        {
+          "url": "https://nordeco.design/upload/iblock/f59/51uefm89y7my6jfdmphp9hd3qp3tulzv.png",
+          "alt": "Адриатика"
+        },
+        {
+          "url": "https://nordeco.design/local/templates/.default/img/icons.svg",
+          "alt": ""
+        },
+        {
+          "url": "https://vk.com/rtrg?p=VK-RTRG-1647326-4FNmM",
+          "alt": ""
+        },
+        {
+          "url": "https://top-fwz1.mail.ru/counter?id=3371089;js=na",
+          "alt": "Top.Mail.Ru"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "id": "lamarty",
+      "manufacturer": "Lamarty",
+      "url": "https://www.lamarty.ru/lamarty/promo/",
+      "mode": "html_catalog",
+      "enabled": true,
+      "notes": "Official promotional catalogue page lists PDF and decor folders; discover links only, verify permitted download/reuse.",
+      "status": "ok",
+      "decor_links": [
+        {
+          "url": "https://www.lamarty.ru/lamarty/decors/",
+          "label": "Декоры ЛДСП"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/fitting-decor/",
+          "label": "Примерка декоров Промокаталоги и видео"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/",
+          "label": "Промокаталоги и видео"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/catalog/",
+          "label": "Купить                 body {\n   font-family: \"Exo 2\",sans-serif;\n   /*font-size: 0.75em;*/\n}\n.sub-nav {display: flex; flex-wrap: wrap; font-size: 16px;margin: 30px 0 10px;}\n.sub-n"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/catalogue_Lamarty_2025-2026_corel.html",
+          "label": "Каталог ЛДСП Lamarty 2025-2026"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/listovka-ldsp-lamarty-universalnoe-reshenie-dlya-interera.html",
+          "label": "Листовка: ЛДСП Lamarty – универсальное решение для интерьера"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/all_Lamarty_decors.html",
+          "label": "Все декоры Lamarty в одной папке, включая новинки  В данной виртуальной папке собраны все файлы картинок декоров Lamarty, необходимые для загрузки в программы 3d моделирования мебе"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/catalog_new_collection_FORMA.html",
+          "label": "Каталог новинок ЛДСП Lamarty 2026. FORMA"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/listovka-raywood.html",
+          "label": "Листовка тиснения Рэйвуд"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/catalogue_new_collection_REFLEX_2023-2024.html",
+          "label": "Каталог новинок ЛДСП Lamarty 23-24. REFLEX"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/catalogue_new_collection_BALANCE_2022-2023.html",
+          "label": "Каталог новинок ЛДСП Lamarty 22:23. BALANCE"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/catalogue_new_collection_TIME_RESTART_2020-2021.html",
+          "label": "Каталог новинок ЛДСП Lamarty 20:21. TIME RESTART"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/biblioteka-dekorov-lamarty-dlya-bazis-mebelschik.html",
+          "label": "Библиотека декоров Lamarty для сервиса БАЗИС-Мебельщик  Архив с текстурами подготовлен компанией ООО \"Базис-Центр\" для загрузки в программный сервис БАЗИС-Мебельщик"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/spravochnye-dannye-po-obemam-vesu-i-normam-pogruzki-plit-lamarty_2026.html",
+          "label": "Справочные данные по объемам, весу и нормам погрузки плит Lamarty"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/Restoration_materials_restograf.html",
+          "label": "Реставрационные материалы к декорам ЛДСП Lamarty  Реставрационные материалы «Рестограф» идеально подходят для восстановления мебели из ламинированной древесно-стружечной плиты Lama"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/сorrespondence_table_decors_to_restoration_materials_MASTER_CITY_01_12_2024.html",
+          "label": "Таблица соответствия названий декоров Lamarty кодам реставрационных материалов от МАСТЕР СИТИ  Совместно с коллегами из компании МАСТЕР СИТИ составлена таблица соответствия наимено"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/multifile/3114/1589/Tablitsa_sootvetstviya_dekorov_Lamarty_materialam_Master_Siti.pdf",
+          "label": "печать )       c 24.07.15"
+        },
+        {
+          "url": "https://www.lamarty.ru/lamarty/promo/Leaflet_Beware_of_Lamarty_counterfeits.html",
+          "label": "Остерегайтесь подделок Lamarty  На мебельном рынке участились случаи продажи древесных плит других производителей, выдаваемых за ЛДСП торговой марки Lamarty производства \r\nООО «Сык"
+        }
+      ],
+      "image_references": [
+        {
+          "url": "https://mc.yandex.ru/watch/264319",
+          "alt": ""
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_template/images/logo_lamarty.svg",
+          "alt": "lamarty"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_template/images/plypan_plypan_color.svg",
+          "alt": "zavod"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_template/images/logo_syply.svg",
+          "alt": "syply"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1607/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Каталог ЛДСП Lamarty 2025-2026"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1635/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Листовка: ЛДСП Lamarty – универсальное решение для интерьера"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/442/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Все декоры Lamarty в одной папке, включая новинки"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1602/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Каталог новинок ЛДСП Lamarty 2026. FORMA"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1600/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Листовка тиснения Рэйвуд"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1529/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Каталог новинок ЛДСП Lamarty 23-24. REFLEX"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1483/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Каталог новинок ЛДСП Lamarty 22:23. BALANCE"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1419/b1228aca7b20a442074a1dee68d981d1.png?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Каталог новинок ЛДСП Lamarty 20:21. TIME RESTART"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1587/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Библиотека декоров Lamarty для сервиса БАЗИС-Мебельщик"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1354/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Справочные данные по объемам, весу и нормам погрузки плит Lamarty"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1618/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Реставрационные материалы к декорам ЛДСП Lamarty"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/1589/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Таблица соответствия названий декоров Lamarty кодам реставрационных материалов от МАСТЕР СИТИ"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_files/generated/174/846/300x440/600/b1228aca7b20a442074a1dee68d981d1.jpg?crop=0%3A0%3A0%3A0&hash=90c6d614cf745ea9fd031ba8d7f4f7ea&resize_mode=0&wm_m=0",
+          "alt": "Остерегайтесь подделок Lamarty"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_template/images/logo_sfz_ru_white.svg",
+          "alt": "sfz"
+        },
+        {
+          "url": "https://www.lamarty.ru/netcat_template/images/logo_syply_white.svg",
+          "alt": "lamarty"
+        }
+      ],
+      "error": ""
+    },
+    {
+      "id": "egger",
+      "manufacturer": "EGGER",
+      "url": "https://www.egger.com/en/furniture-interior-design/decorative-collection/decordata-download",
+      "mode": "portal_catalog",
+      "enabled": true,
+      "notes": "Official download page; watermark-free decor files and data packages require myEGGER registration. Do not automate login.",
+      "status": "skipped",
+      "decor_links": [],
+      "image_references": [],
+      "error": ""
+    },
+    {
+      "id": "yugra_plit",
+      "manufacturer": "Югра-Плит",
+      "url": "https://ugra-plit.ru/",
+      "mode": "manual_review",
+      "enabled": false,
+      "notes": "Official domain referenced by distributors, but catalogue endpoint and current availability need confirmation before automation.",
+      "status": "skipped",
+      "decor_links": [],
+      "image_references": [],
+      "error": ""
+    }
+  ]
+}
