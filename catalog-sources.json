@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "policy": "Discover public catalogue metadata and source links. Do not bulk-copy or republish manufacturer images unless the source terms or written permission allow it.",
+  "sources": [
+    {
+      "id": "nordeco",
+      "manufacturer": "NORDECO design",
+      "url": "https://nordeco.design/katalog-dekorov/",
+      "mode": "html_catalog",
+      "enabled": true,
+      "notes": "Public decor cards expose names, collection, category, surface structure and decor detail pages. Inspect image rights before mirroring."
+    },
+    {
+      "id": "lamarty",
+      "manufacturer": "Lamarty",
+      "url": "https://www.lamarty.ru/lamarty/promo/",
+      "mode": "html_catalog",
+      "enabled": true,
+      "notes": "Official promotional catalogue page lists PDF and decor folders; discover links only, verify permitted download/reuse."
+    },
+    {
+      "id": "egger",
+      "manufacturer": "EGGER",
+      "url": "https://www.egger.com/en/furniture-interior-design/decorative-collection/decordata-download",
+      "mode": "portal_catalog",
+      "enabled": true,
+      "notes": "Official download page; watermark-free decor files and data packages require myEGGER registration. Do not automate login."
+    },
+    {
+      "id": "yugra_plit",
+      "manufacturer": "Югра-Плит",
+      "url": "https://ugra-plit.ru/",
+      "mode": "manual_review",
+      "enabled": false,
+      "notes": "Official domain referenced by distributors, but catalogue endpoint and current availability need confirmation before automation."
+    }
+  ]
+}
